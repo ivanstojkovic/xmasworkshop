@@ -1,7 +1,5 @@
 package at.tuwien.sbc.task2.worker.assembly;
 
-import at.tuwien.sbc.task2.common.Constants;
-import at.tuwien.sbc.task2.common.UnknownTaskResult;
 import at.tuwien.sbc.task2.interfaces.Task;
 import at.tuwien.sbc.task2.interfaces.TaskResult;
 import at.tuwien.sbc.task2.interfaces.Worker;
@@ -17,7 +15,7 @@ public abstract class AssemblyGnome implements Worker {
             t.doTask();
         }
         
-        return new UnknownTaskResult(this, Constants.UNKNOWN_TASK);
+        return task.getProducer().produceResult();
     }
     
     public String getId() {

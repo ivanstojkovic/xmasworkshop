@@ -2,11 +2,15 @@ package at.tuwien.sbc.task2.worker.assembly;
 
 import at.tuwien.sbc.task2.interfaces.Task;
 import at.tuwien.sbc.task2.interfaces.TaskResult;
+import at.tuwien.sbc.task2.interfaces.UnknownTaskResultProducer;
 
-public class AssemblyTask implements Task {
+public abstract class AssemblyTask implements Task {
 
-    public TaskResult doTask() {
-        return null;
+    private UnknownTaskResultProducer producer;
+
+    public UnknownTaskResultProducer getProducer() {
+        return this.producer;
     }
     
+    public abstract TaskResult doTask();
 }

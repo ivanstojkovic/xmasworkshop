@@ -1,8 +1,6 @@
 package at.tuwien.sbc.task2.worker.production;
 
 
-import at.tuwien.sbc.task2.common.Constants;
-import at.tuwien.sbc.task2.common.UnknownTaskResult;
 import at.tuwien.sbc.task2.interfaces.Task;
 import at.tuwien.sbc.task2.interfaces.TaskResult;
 import at.tuwien.sbc.task2.interfaces.Worker;
@@ -25,7 +23,7 @@ public class ProductionElf implements Worker {
             return t.doTask();
         }
 
-        return new UnknownTaskResult(this, Constants.UNKNOWN_TASK);
+        return task.getProducer().produceResult();
     }
     
     public String getId() {

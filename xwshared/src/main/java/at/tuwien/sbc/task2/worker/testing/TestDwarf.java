@@ -1,7 +1,5 @@
 package at.tuwien.sbc.task2.worker.testing;
 
-import at.tuwien.sbc.task2.common.Constants;
-import at.tuwien.sbc.task2.common.UnknownTaskResult;
 import at.tuwien.sbc.task2.interfaces.Task;
 import at.tuwien.sbc.task2.interfaces.TaskResult;
 import at.tuwien.sbc.task2.interfaces.Worker;
@@ -13,10 +11,10 @@ public class TestDwarf implements Worker {
     public TaskResult execute(Task task) {
         if (task instanceof TestTask) {
             TestTask t = (TestTask) task;
-            //...
+            t.doTask();
         }
         
-        return new UnknownTaskResult(this, Constants.UNKNOWN_TASK);
+        return task.getProducer().produceResult();
     }
     
     public String getId() {
