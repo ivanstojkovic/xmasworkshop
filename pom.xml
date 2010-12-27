@@ -52,6 +52,6 @@
     <module>xwapi</module>
     <module>xvsmimpl</module>
     <module>alternateimpl</module>
-    <module>xwmodel</module>
+    <module>xwshared</module>
   </modules>
 </project>
