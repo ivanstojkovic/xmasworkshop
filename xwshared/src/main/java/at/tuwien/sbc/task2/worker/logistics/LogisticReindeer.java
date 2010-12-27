@@ -2,9 +2,9 @@ package at.tuwien.sbc.task2.worker.logistics;
 
 import at.tuwien.sbc.task2.common.Constants;
 import at.tuwien.sbc.task2.common.UnknownTaskResult;
-import at.tuwien.sbc.task2.xwapi.worker.Task;
-import at.tuwien.sbc.task2.xwapi.worker.TaskResult;
-import at.tuwien.sbc.task2.xwapi.worker.Worker;
+import at.tuwien.sbc.task2.interfaces.Task;
+import at.tuwien.sbc.task2.interfaces.TaskResult;
+import at.tuwien.sbc.task2.interfaces.Worker;
 
 public class LogisticReindeer implements Worker {
 

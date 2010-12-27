@@ -1,6 +1,6 @@
 package at.tuwien.sbc.task2.xwmodel;
 
-import at.tuwien.sbc.task2.xwapi.teddy.TeddyPart;
+import at.tuwien.sbc.task2.interfaces.TeddyPart;
 
 public class Leg implements TeddyPart {
     

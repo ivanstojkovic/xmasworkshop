@@ -17,13 +17,6 @@
   <dependencies>
   	<dependency>
   		<groupId>at.tuwien.sbc.task2</groupId>
-  		<artifactId>xwapi</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<type>jar</type>
-  		<scope>compile</scope>
-  	</dependency>
-  	<dependency>
-  		<groupId>at.tuwien.sbc.task2</groupId>
   		<artifactId>xvsmimpl</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   		<type>jar</type>
@@ -35,6 +28,11 @@
   		<version>0.0.1-SNAPSHOT</version>
   		<type>jar</type>
   		<scope>compile</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>at.tuwien.sbc.task2</groupId>
+  		<artifactId>xwshared</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
 </project>

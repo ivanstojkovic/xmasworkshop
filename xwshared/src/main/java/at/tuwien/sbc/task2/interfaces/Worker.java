@@ -1,4 +1,4 @@
-package at.tuwien.sbc.task2.xwapi.worker;
+package at.tuwien.sbc.task2.interfaces;
 
 public interface Worker {
     

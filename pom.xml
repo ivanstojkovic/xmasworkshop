@@ -49,7 +49,6 @@
 	</dependencies>
 	<modules>
 	<module>gui</module>
-    <module>xwapi</module>
     <module>xvsmimpl</module>
     <module>alternateimpl</module>
     <module>xwshared</module>

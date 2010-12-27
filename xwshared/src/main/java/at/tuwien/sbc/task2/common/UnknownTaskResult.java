@@ -1,7 +1,7 @@
 package at.tuwien.sbc.task2.common;
 
-import at.tuwien.sbc.task2.xwapi.worker.TaskResult;
-import at.tuwien.sbc.task2.xwapi.worker.Worker;
+import at.tuwien.sbc.task2.interfaces.TaskResult;
+import at.tuwien.sbc.task2.interfaces.Worker;
 
 public class UnknownTaskResult implements TaskResult {
 
