@@ -48,9 +48,10 @@
 		</dependency>
 	</dependencies>
 	<modules>
-		<module>gui</module>
+	<module>gui</module>
     <module>xwapi</module>
     <module>xvsmimpl</module>
     <module>alternateimpl</module>
+    <module>xwmodel</module>
   </modules>
 </project>
