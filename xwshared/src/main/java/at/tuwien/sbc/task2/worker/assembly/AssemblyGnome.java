@@ -5,7 +5,7 @@ import at.tuwien.sbc.task2.interfaces.TaskResult;
 import at.tuwien.sbc.task2.interfaces.Worker;
 
 //MontageWichtel
-public abstract class AssemblyGnome implements Worker {
+public class AssemblyGnome implements Worker {
     
     private String id;
     
