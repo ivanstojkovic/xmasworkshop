@@ -14,4 +14,5 @@ public interface TeddyPart {
     boolean isDefective();
     
     void setDefective(boolean defective);
+  
 }
