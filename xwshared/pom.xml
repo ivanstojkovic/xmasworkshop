@@ -10,11 +10,6 @@
   <name>xwshared</name>
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
-    <dependency>
-    	<groupId>at.tuwien.sbc.task2</groupId>
-    	<artifactId>xwapi</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
   </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

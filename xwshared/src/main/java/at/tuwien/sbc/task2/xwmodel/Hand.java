@@ -10,7 +10,14 @@ public class Hand implements TeddyPart {
     
     private boolean defective;
     
-    public String getId() {
+    public Hand(String id, String workerId, boolean defective) {
+		super();
+		this.id = id;
+		this.workerId = workerId;
+		this.defective = defective;
+	}
+
+	public String getId() {
         return id;
     }
     

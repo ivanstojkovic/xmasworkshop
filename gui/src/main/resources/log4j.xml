@@ -9,6 +9,10 @@
 		</layout>
 	</appender>
 
+
+	<logger name="org.mozartspaces">
+		<level value="INFO" />
+	</logger>
 	<root>
 		<appender-ref ref="CONSOLE" />
 	</root>

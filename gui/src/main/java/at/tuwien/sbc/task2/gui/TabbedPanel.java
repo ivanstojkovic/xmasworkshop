@@ -18,11 +18,10 @@ public class TabbedPanel extends JPanel {
         super(new GridLayout(1, 1));
         
         setTabs(new JTabbedPane());
-        ImageIcon icon = createImageIcon("images/organize.jpg");
-        
+
         CreatePanel pnlOrg = new CreatePanel();
         pnlOrg.addComponentListener(pnlOrg);
-        this.getTabs().addTab("Workers", icon, pnlOrg, "Create Workers");
+        this.getTabs().addTab("Workers", null, pnlOrg, "Create Workers");
         this.getTabs().setMnemonicAt(0, KeyEvent.VK_1);
         
         // Add the tabbed pane to this panel.
@@ -30,35 +29,6 @@ public class TabbedPanel extends JPanel {
         
         // The following line enables to use scrolling tabs.
         this.getTabs().setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-    }
-    
-    public void enableTab(int tab, boolean enable) {
-        if (tab == -1) {
-            this.setEnabled(enable);
-            for (Component c : this.getTabs().getComponents()) {
-                this.recursiveEnabling((Container) c, enable);
-                this.recursiveEnabling((Container) c, enable);
-            }
-        } else {
-            Component t = this.getTabs().getComponentAt(tab);
-            t.setEnabled(enable);
-            this.recursiveEnabling((Container) this.getTabs().getComponentAt(tab), enable);
-        }
-    }
-    
-    /** Returns an ImageIcon, or null if the path was invalid. */
-    protected static ImageIcon createImageIcon(String path) {
-        return new ImageIcon(ClassLoader.getSystemResource(path));
-    }
-    
-    private void recursiveEnabling(Container c, boolean enable) {
-        c.setEnabled(enable);
-        for (Component comp : c.getComponents()) {
-            comp.setEnabled(enable);
-            if (comp instanceof Container) {
-                this.recursiveEnabling((Container) comp, enable);
-            }
-        }
     }
 
     public void setTabs(JTabbedPane tabs) {
