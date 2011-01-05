@@ -68,11 +68,11 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
             {
                 this.tabs = new TabbedPanel();
                 getContentPane().add(this.tabs, BorderLayout.CENTER);
-                tabs.setPreferredSize(new java.awt.Dimension(725, 357));
+                tabs.setPreferredSize(new java.awt.Dimension(620, 450));
             }
 
             pack();
-            this.setSize(643, 560);
+            this.setSize(620, 450);
         } catch (Exception e) {
             // add your error handling code here
             e.printStackTrace();
@@ -80,8 +80,10 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
     }
 
 	public void actionPerformed(ActionEvent e) {
-
-		
+		if(e.getActionCommand().equals(Constants.CMD_MENU_QUIT)) {
+			this.dispose();
+            System.exit(0);
+		}
 	}
 
 

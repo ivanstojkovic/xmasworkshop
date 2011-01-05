@@ -25,8 +25,9 @@ public class Body implements TeddyPart {
 		this.id = id;
 	}
 
+	@Override
 	public String toString() {
-		return "TeddyBody [id= " + this.id + "]";
+		return "Body [id=" + id + ", workerId=" + workerId + ", defective=" + defective + "]";
 	}
 
 	public String getProducerId() {
@@ -44,4 +45,5 @@ public class Body implements TeddyPart {
 	public void setProducerId(String worker) {
 		this.workerId = worker;
 	}
+	
 }

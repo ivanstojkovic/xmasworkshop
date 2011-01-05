@@ -36,8 +36,9 @@ public class Hat implements TeddyPart {
 		return color;
 	}
 
+	@Override
 	public String toString() {
-		return "TeddyHat [id= " + this.id + "][color= " + this.color + "]";
+		return "Hat [id=" + id + ", color=" + color + ", workerId=" + workerId + ", defective=" + defective + "]";
 	}
 
 	public String getProducerId() {

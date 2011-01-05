@@ -2,11 +2,12 @@ package at.tuwien.sbc.task2.connection;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import at.tuwien.sbc.task2.connection.mozartspaces.MozartSpacesControllerReference;
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 import at.tuwien.sbc.task2.interfaces.XMasWorkshopEntry;
 import at.tuwien.sbc.task2.worker.production.ProductionElf;
@@ -15,6 +16,7 @@ import at.tuwien.sbc.task2.xwmodel.Hand;
 import at.tuwien.sbc.task2.xwmodel.Hat;
 import at.tuwien.sbc.task2.xwmodel.Head;
 import at.tuwien.sbc.task2.xwmodel.Leg;
+import at.tuwien.sbc.task2.xwmodel.TeddyBear;
 
 public class CentralController implements Controller {
 
@@ -22,7 +24,7 @@ public class CentralController implements Controller {
 
 	private static CentralController instance = new CentralController();
 
-	private boolean webServicesActivated = false;
+	private Controller technologyInstance;
 
 	private CentralController() {
 		initConfiguration();
@@ -38,7 +40,9 @@ public class CentralController implements Controller {
 			fis.close();
 			String technology = props.getProperty("technology");
 			if (technology.equals("webservices")) {
-				webServicesActivated = true;
+				//	TODO technologyInstance = WebServiceControllerReference.getInstance(); 
+			}else{
+				technologyInstance = MozartSpacesControllerReference.getInstance(); 
 			}
 			logger.info("Technology selected: " + technology);
 		} catch (FileNotFoundException e) {
@@ -50,11 +54,7 @@ public class CentralController implements Controller {
 
 	@Override
 	public void write(XMasWorkshopEntry o) {
-		if (!webServicesActivated) {
-			MozartSpacesControllerReference.getInstance().write(o);
-		} else {
-			// TODO
-		}
+		technologyInstance.write(o);
 	}
 
 	@Override
@@ -82,19 +82,20 @@ public class CentralController implements Controller {
 		default:
 			break;
 		}
-		if (!webServicesActivated) {
-			MozartSpacesControllerReference.getInstance().write(objToWrite);
-		} else {
-			// TODO
-		}
+		technologyInstance.write(objToWrite);
 	}
 
 	public static CentralController getInstance() {
 		return instance;
 	}
 
-	public static void setInstance(CentralController instance) {
-		CentralController.instance = instance;
+	public List<TeddyBear> findTeddyBears() {
+		return technologyInstance.findTeddyBears();
+	}
+
+	@Override
+	public List<TeddyPart> findTeddyParts() {
+		return technologyInstance.findTeddyParts();
 	}
 
 }

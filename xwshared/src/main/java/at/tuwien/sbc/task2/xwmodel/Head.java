@@ -25,8 +25,9 @@ public class Head implements TeddyPart {
 		this.id = id;
 	}
 
+	@Override
 	public String toString() {
-		return "TeddyHead [id= " + this.id + "]";
+		return "Head [id=" + id + ", workerId=" + workerId + ", defective=" + defective + "]";
 	}
 
 	public String getProducerId() {

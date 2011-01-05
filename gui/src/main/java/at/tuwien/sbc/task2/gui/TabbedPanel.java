@@ -1,11 +1,8 @@
 package at.tuwien.sbc.task2.gui;
 
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -19,10 +16,20 @@ public class TabbedPanel extends JPanel {
         
         setTabs(new JTabbedPane());
 
-        CreatePanel pnlOrg = new CreatePanel();
-        pnlOrg.addComponentListener(pnlOrg);
-        this.getTabs().addTab("Workers", null, pnlOrg, "Create Workers");
+        CreatePanel createPanel = new CreatePanel();
+        createPanel.addComponentListener(createPanel);
+        this.getTabs().addTab("Workers", null, createPanel, "Create Workers");
         this.getTabs().setMnemonicAt(0, KeyEvent.VK_1);
+        
+        TeddyBearOverviewPanel teddyBearOverviewPanel = new TeddyBearOverviewPanel();
+        teddyBearOverviewPanel.addComponentListener(teddyBearOverviewPanel);
+        this.getTabs().addTab("Teddy Bear Overview", null, teddyBearOverviewPanel, "Teddy Bears Overview");
+        this.getTabs().setMnemonicAt(0, KeyEvent.VK_2);
+
+        PartsOverviewPanel teddyPartOverviewPanel = new PartsOverviewPanel();
+        teddyPartOverviewPanel.addComponentListener(teddyPartOverviewPanel);
+        this.getTabs().addTab("Teddy Parts Overview", null, teddyPartOverviewPanel, "Teddy Parts Overview");
+        this.getTabs().setMnemonicAt(0, KeyEvent.VK_3);
         
         // Add the tabbed pane to this panel.
         add(this.getTabs());
