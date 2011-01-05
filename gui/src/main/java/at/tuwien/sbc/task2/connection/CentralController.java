@@ -62,22 +62,22 @@ public class CentralController implements Controller {
 		TeddyPart objToWrite = null;
 		switch (elf.getFunction()) {
 		case ARM:
-			objToWrite = new Hand("hand_" + elf.getId() + "_" + partNr, elf.getId(), defect);
+			objToWrite = new Hand("arm_" + elf.getId() + "_" + partNr, elf.getId(), defect);
 			break;
 		case LEG:
-			objToWrite = new Leg("hand_" + elf.getId() + "_" + partNr, elf.getId(), defect);
+			objToWrite = new Leg("leg_" + elf.getId() + "_" + partNr, elf.getId(), defect);
 			break;
 		case HEAD:
-			objToWrite = new Head("hand_" + elf.getId() + "_" + partNr, elf.getId(), defect);
+			objToWrite = new Head("head_" + elf.getId() + "_" + partNr, elf.getId(), defect);
 			break;
 		case BODY:
-			objToWrite = new Body("hand_" + elf.getId() + "_" + partNr, elf.getId(), defect);
+			objToWrite = new Body("body_" + elf.getId() + "_" + partNr, elf.getId(), defect);
 			break;
 		case HAT_GREEN:
-			objToWrite = new Hat("hand_" + elf.getId() + "_" + partNr, "GREEN", elf.getId(), defect);
+			objToWrite = new Hat("hat_green_" + elf.getId() + "_" + partNr, "GREEN", elf.getId(), defect);
 			break;
 		case HAT_RED:
-			objToWrite = new Hat("hand_" + elf.getId() + "_" + partNr, "RED", elf.getId(), defect);
+			objToWrite = new Hat("hat_red_" + elf.getId() + "_" + partNr, "RED", elf.getId(), defect);
 			break;
 		default:
 			break;
