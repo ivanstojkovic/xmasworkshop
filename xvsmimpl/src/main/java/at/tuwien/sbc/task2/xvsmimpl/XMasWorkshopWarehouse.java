@@ -56,7 +56,7 @@ public class XMasWorkshopWarehouse {
 		Properties props = new Properties();
 		FileInputStream fis;
 		try {
-			fis = new FileInputStream("gui.properties");
+			fis = new FileInputStream("xmaswarehouse.properties");
 			props.load(fis);
 			fis.close();
 			nrAssemblyGnome = Integer.parseInt(props.getProperty("worker.assemblyGnome.count"));
