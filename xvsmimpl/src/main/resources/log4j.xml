@@ -8,12 +8,8 @@
 			<param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %-5p [%c{1}] %m%n" />
 		</layout>
 	</appender>
-
-	<logger name="org.springframework">
-		<level value="WARN" />
-	</logger>
-	<logger name="org.openspaces">
-		<level value="WARN" />
+	<logger name="org.mozartspaces">
+		<level value="INFO" />
 	</logger>
 	<root>
 		<appender-ref ref="CONSOLE" />
