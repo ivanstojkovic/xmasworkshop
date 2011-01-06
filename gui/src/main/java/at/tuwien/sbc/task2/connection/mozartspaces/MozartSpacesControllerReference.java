@@ -55,10 +55,8 @@ public class MozartSpacesControllerReference implements Controller {
 			partContainer = capi.lookupContainer("partsContainer", uri, 0, null);
 			teddyBearContainer = capi.lookupContainer("teddyBearContainer", uri, 0 ,null);
 		} catch (MzsCoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
