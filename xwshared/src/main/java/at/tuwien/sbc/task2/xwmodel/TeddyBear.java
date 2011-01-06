@@ -1,6 +1,12 @@
 package at.tuwien.sbc.task2.xwmodel;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import at.tuwien.sbc.task2.interfaces.XMasWorkshopEntry;
+import at.tuwien.sbc.task2.worker.testing.ComponentTest;
+import at.tuwien.sbc.task2.worker.testing.TeddyBearTest;
+import at.tuwien.sbc.task2.worker.testing.WeightTest;
 
 public class TeddyBear implements XMasWorkshopEntry {
 
@@ -26,6 +32,8 @@ public class TeddyBear implements XMasWorkshopEntry {
 
 	private boolean ready;
 	
+	private Map<TeddyBearTest, Boolean> doneTests;
+	
 	public TeddyBear(String id, Head head, Body body, Hand leftHand, Hand rightHand, Leg leftLeg, Leg rightLeg, Hat hat, boolean defective,
 			boolean ready) {
 		super();
@@ -39,6 +47,9 @@ public class TeddyBear implements XMasWorkshopEntry {
 		this.hat = hat;
 		this.defective = defective;
 		this.ready = ready;
+		this.doneTests = new HashMap<TeddyBearTest, Boolean>();
+		this.doneTests.put(new ComponentTest(), new Boolean(false));
+		this.doneTests.put(new WeightTest(), new Boolean(false));
 	}
 	
 	public TeddyBear() {

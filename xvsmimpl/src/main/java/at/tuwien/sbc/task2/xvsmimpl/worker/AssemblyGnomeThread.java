@@ -147,6 +147,7 @@ public class AssemblyGnomeThread extends Thread {
 
     private TeddyBear assembleTeddy(ArrayList<TeddyPart> foundTeddyParts) {
         final TeddyBear teddy = new TeddyBear();
+        teddy.setDefective(false); //not defective, testing will determine...
 
         for (TeddyPart part : foundTeddyParts) {
             TeddyBearPart type = part.getTeddyPartType();
