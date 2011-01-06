@@ -4,7 +4,9 @@ import at.tuwien.sbc.task2.interfaces.TeddyPart;
 
 public class Body implements TeddyPart {
 
-	private String id;
+    private static final long serialVersionUID = -3455228566335648270L;
+
+    private String id;
 
 	private String workerId;
 

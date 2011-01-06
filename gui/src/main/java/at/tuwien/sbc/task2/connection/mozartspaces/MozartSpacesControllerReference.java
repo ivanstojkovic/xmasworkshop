@@ -1,6 +1,5 @@
 package at.tuwien.sbc.task2.connection.mozartspaces;
 
-import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;

@@ -3,7 +3,6 @@ package at.tuwien.sbc.task2.xvsmimpl.worker;
 import org.apache.log4j.Logger;
 import org.mozartspaces.core.ContainerReference;
 
-import at.tuwien.sbc.task2.worker.assembly.AssemblyGnome;
 import at.tuwien.sbc.task2.worker.logistics.LogisticReindeer;
 
 public class LogisticReindeerThread extends Thread {
@@ -19,6 +18,10 @@ public class LogisticReindeerThread extends Thread {
 
 	public void run() {
 		
+	}
+	
+	public static void main(String[] args) {
+	    //TODO pass id as argument....
 	}
 
 }

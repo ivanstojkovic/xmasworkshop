@@ -16,10 +16,8 @@ public class ProduktionElfThread extends Thread {
 	}
 
 	public void run() {
-		// each X part will be defective
-	    double val =  ((double) elf.getErrorRate() * elf.getQuantity() / 100);
-		int everyXDefective = (int) Math.ceil(val);
-		logger.info(val + " defective: " + everyXDefective);
+		int everyXDefective = (int) Math.ceil(((double) elf.getErrorRate() * elf.getQuantity() / 100));
+		logger.info("Elf will produce " + everyXDefective + " defective parts");
 		
 		for (int i = 0; i < elf.getQuantity(); i++) {
 			CentralController.getInstance().writePart(elf, i+1, ((i < everyXDefective) ? true : false));

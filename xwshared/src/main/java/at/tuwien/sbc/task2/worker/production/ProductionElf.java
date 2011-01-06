@@ -2,8 +2,6 @@ package at.tuwien.sbc.task2.worker.production;
 
 import java.io.Serializable;
 
-import at.tuwien.sbc.task2.interfaces.Task;
-import at.tuwien.sbc.task2.interfaces.TaskResult;
 import at.tuwien.sbc.task2.interfaces.Worker;
 import at.tuwien.sbc.task2.xwmodel.TeddyBearPart;
 
@@ -25,16 +23,6 @@ public class ProductionElf implements Worker, Serializable {
 		this.errorRate = errorRate;
 		this.function = function;
 		this.quantity = quantity;
-	}
-
-	public TaskResult execute(final Task task) {
-		if (task instanceof ProductionTask) {
-			final ProductionTask t = (ProductionTask) task;
-			t.setErrorRate(this.errorRate);
-			return t.doTask();
-		}
-
-		return task.getProducer().produceResult();
 	}
 
 	public String getId() {

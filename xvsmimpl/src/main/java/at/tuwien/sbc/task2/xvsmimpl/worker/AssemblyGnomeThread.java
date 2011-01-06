@@ -50,6 +50,7 @@ public class AssemblyGnomeThread extends Thread {
         initMozartSpaces();
     }
 
+    //TODO pass id as argument....
     public static void main(String[] args) {
         new AssemblyGnomeThread().start();
     }

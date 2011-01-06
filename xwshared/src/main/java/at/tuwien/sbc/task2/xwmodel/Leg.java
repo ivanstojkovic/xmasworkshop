@@ -4,7 +4,9 @@ import at.tuwien.sbc.task2.interfaces.TeddyPart;
 
 public class Leg implements TeddyPart {
 
-	private String id;
+    private static final long serialVersionUID = 7546803034850290498L;
+
+    private String id;
 
 	private String workerId;
 
