@@ -23,7 +23,7 @@ import at.tuwien.sbc.task2.interfaces.XMasWorkshopEntry;
 import at.tuwien.sbc.task2.worker.production.ProductionElf;
 import at.tuwien.sbc.task2.xwmodel.Body;
 import at.tuwien.sbc.task2.xwmodel.Hand;
-import at.tuwien.sbc.task2.xwmodel.Hat;
+import at.tuwien.sbc.task2.xwmodel.HatRed;
 import at.tuwien.sbc.task2.xwmodel.Head;
 import at.tuwien.sbc.task2.xwmodel.Leg;
 import at.tuwien.sbc.task2.xwmodel.TeddyBear;

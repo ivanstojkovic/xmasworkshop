@@ -20,13 +20,13 @@ public class TeddyBear implements XMasWorkshopEntry {
 
 	private Leg rightLeg;
 
-	private Hat hat;
+	private HatRed hat;
 
 	private boolean defective;
 
 	private boolean ready;
 	
-	public TeddyBear(String id, Head head, Body body, Hand leftHand, Hand rightHand, Leg leftLeg, Leg rightLeg, Hat hat, boolean defective,
+	public TeddyBear(String id, Head head, Body body, Hand leftHand, Hand rightHand, Leg leftLeg, Leg rightLeg, HatRed hat, boolean defective,
 			boolean ready) {
 		super();
 		this.id = id;
@@ -97,11 +97,11 @@ public class TeddyBear implements XMasWorkshopEntry {
 		this.rightLeg = rightLeg;
 	}
 
-	public Hat getHat() {
+	public HatRed getHat() {
 		return hat;
 	}
 
-	public void setHat(Hat hat) {
+	public void setHat(HatRed hat) {
 		this.hat = hat;
 	}
 

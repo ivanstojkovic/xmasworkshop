@@ -2,7 +2,7 @@ package at.tuwien.sbc.task2.xwmodel;
 
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 
-public class Body implements TeddyPart {
+public class HatRed implements TeddyPart {
 
 	private String id;
 
@@ -10,7 +10,7 @@ public class Body implements TeddyPart {
 
 	private boolean defective;
 
-	public Body(String id, String workerId, boolean defective) {
+	public HatRed(String id, String workerId, boolean defective) {
 		super();
 		this.id = id;
 		this.workerId = workerId;
@@ -27,7 +27,7 @@ public class Body implements TeddyPart {
 
 	@Override
 	public String toString() {
-		return "Body [id=" + id + ", workerId=" + workerId + ", defective=" + defective + "]";
+		return "Hat [id=" + id + ", workerId=" + workerId + ", defective=" + defective + "]";
 	}
 
 	public String getProducerId() {
@@ -42,13 +42,13 @@ public class Body implements TeddyPart {
 		this.defective = defective;
 	}
 
-	public void setProducerId(String worker) {
-		this.workerId = worker;
+	public void setProducerId(String workerId) {
+		this.workerId = workerId;
 	}
 
 	@Override
 	public TeddyBearPart getTeddyPartType() {
-		return TeddyBearPart.BODY;
+		return TeddyBearPart.HAT_GREEN;
 	}
-	
+
 }

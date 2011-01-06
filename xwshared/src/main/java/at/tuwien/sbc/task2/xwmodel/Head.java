@@ -46,4 +46,9 @@ public class Head implements TeddyPart {
 		this.workerId = workerId;
 	}
 
+	@Override
+	public TeddyBearPart getTeddyPartType() {
+		return TeddyBearPart.HEAD;
+	}
+
 }

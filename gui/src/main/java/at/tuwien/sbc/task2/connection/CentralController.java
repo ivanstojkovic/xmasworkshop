@@ -13,7 +13,8 @@ import at.tuwien.sbc.task2.interfaces.XMasWorkshopEntry;
 import at.tuwien.sbc.task2.worker.production.ProductionElf;
 import at.tuwien.sbc.task2.xwmodel.Body;
 import at.tuwien.sbc.task2.xwmodel.Hand;
-import at.tuwien.sbc.task2.xwmodel.Hat;
+import at.tuwien.sbc.task2.xwmodel.HatGreen;
+import at.tuwien.sbc.task2.xwmodel.HatRed;
 import at.tuwien.sbc.task2.xwmodel.Head;
 import at.tuwien.sbc.task2.xwmodel.Leg;
 import at.tuwien.sbc.task2.xwmodel.TeddyBear;
@@ -74,10 +75,10 @@ public class CentralController implements Controller {
 			objToWrite = new Body("body_" + elf.getId() + "_" + partNr, elf.getId(), defect);
 			break;
 		case HAT_GREEN:
-			objToWrite = new Hat("hat_green_" + elf.getId() + "_" + partNr, "GREEN", elf.getId(), defect);
+			objToWrite = new HatGreen("hat_green_" + elf.getId() + "_" + partNr, elf.getId(), defect);
 			break;
 		case HAT_RED:
-			objToWrite = new Hat("hat_red_" + elf.getId() + "_" + partNr, "RED", elf.getId(), defect);
+			objToWrite = new HatRed("hat_red_" + elf.getId() + "_" + partNr, elf.getId(), defect);
 			break;
 		default:
 			break;

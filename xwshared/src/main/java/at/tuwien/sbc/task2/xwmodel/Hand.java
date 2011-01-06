@@ -46,4 +46,9 @@ public class Hand implements TeddyPart {
 		this.workerId = workerId;
 	}
 
+	@Override
+	public TeddyBearPart getTeddyPartType() {
+		return TeddyBearPart.ARM;
+	}
+
 }

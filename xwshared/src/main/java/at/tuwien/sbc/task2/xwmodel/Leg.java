@@ -45,6 +45,11 @@ public class Leg implements TeddyPart {
 	public void setProducerId(String workerId) {
 		this.workerId = workerId;
 	}
+
+	@Override
+	public TeddyBearPart getTeddyPartType() {
+		return TeddyBearPart.LEG;
+	}
 	
 	
 }

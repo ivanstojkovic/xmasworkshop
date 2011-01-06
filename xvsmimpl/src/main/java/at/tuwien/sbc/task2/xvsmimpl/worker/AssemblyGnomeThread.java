@@ -1,45 +1,75 @@
 package at.tuwien.sbc.task2.xvsmimpl.worker;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 import org.mozartspaces.capi3.FifoCoordinator;
+import org.mozartspaces.capi3.LabelCoordinator;
 import org.mozartspaces.core.Capi;
 import org.mozartspaces.core.ContainerReference;
+import org.mozartspaces.core.DefaultMzsCore;
+import org.mozartspaces.core.MzsConstants;
+import org.mozartspaces.core.MzsCore;
 import org.mozartspaces.core.MzsCoreException;
 
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 import at.tuwien.sbc.task2.worker.assembly.AssemblyGnome;
+import at.tuwien.sbc.task2.xvsmimpl.XMasWorkshopWarehouse;
 import at.tuwien.sbc.task2.xwmodel.TeddyBearPart;
 
 public class AssemblyGnomeThread extends Thread {
 
-	private static Logger logger = Logger.getLogger(AssemblyGnomeThread.class);
+	private Logger logger = Logger.getLogger(AssemblyGnomeThread.class);
 
 	private AssemblyGnome assemblyGnome;
+
+	private MzsCore core;
+	private Capi capi;
 	private ContainerReference partContainer;
 	private ContainerReference teddyBearContainer;
-	private Capi capi;
+	private URI uri;
 
-	public AssemblyGnomeThread(Capi capi, AssemblyGnome assemblyGnome, ContainerReference partContainer, ContainerReference teddyBearContainer) {
-		this.assemblyGnome = assemblyGnome;
+	public AssemblyGnomeThread() {
+		assemblyGnome = new AssemblyGnome("AssemblyGnome_" + this.getName());
+		initMozartSpaces();
+	}
+
+	private void initMozartSpaces() {
+		logger.info("init MozartSpaces");
+		try {
+			uri = new URI(XMasWorkshopWarehouse.SERVER_URI);
+			core = DefaultMzsCore.newInstance(9876);
+			capi = new Capi(core);
+			partContainer = capi.createContainer("partsContainer", uri, MzsConstants.Container.UNBOUNDED,
+					Arrays.asList(new FifoCoordinator()), null, null);
+			teddyBearContainer = capi.createContainer("teddyBearContainer", uri, MzsConstants.Container.UNBOUNDED,
+					Arrays.asList(new LabelCoordinator()), null, null);
+
+		} catch (MzsCoreException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void run() {
-		while(true) {
-			
+		while (true) {
+
 			ArrayList<TeddyPart> foundTeddyParts = new ArrayList<TeddyPart>();
 			try {
-				foundTeddyParts = capi.read(partContainer, Arrays.asList(FifoCoordinator.newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, null);
+				foundTeddyParts = capi.read(partContainer,
+						Arrays.asList(FifoCoordinator.newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, null);
 				logger.info("found " + foundTeddyParts.size() + " TeddyParts");
 			} catch (MzsCoreException e) {
 				e.printStackTrace();
 			}
-			
-			if(foundTeddyParts.size()>0) {
-				if(allPartForTeddyBearThere(foundTeddyParts)) {
-					
+
+			if (foundTeddyParts.size() > 0) {
+				if (allPartForTeddyBearThere(foundTeddyParts)) {
+					// TODO	
 				}
 			}
 
@@ -59,7 +89,7 @@ public class AssemblyGnomeThread extends Thread {
 		boolean armLeftExist = false;
 		boolean armRightExist = false;
 		boolean bodyExist = false;
-		for(TeddyPart tp : foundTeddyParts) {
+		for (TeddyPart tp : foundTeddyParts) {
 			switch (tp.getTeddyPartType()) {
 			case HEAD:
 				headExist = true;
@@ -71,16 +101,16 @@ public class AssemblyGnomeThread extends Thread {
 				hatExist = true;
 				break;
 			case LEG:
-				if(legLeftExist) {
+				if (legLeftExist) {
 					legRightExist = true;
-				}else{
+				} else {
 					legLeftExist = true;
 				}
 				break;
 			case ARM:
-				if(armLeftExist) {
+				if (armLeftExist) {
 					armRightExist = true;
-				}else{
+				} else {
 					armLeftExist = true;
 				}
 				break;
@@ -91,7 +121,7 @@ public class AssemblyGnomeThread extends Thread {
 				break;
 			}
 		}
-		if(hatExist && headExist && legLeftExist && legRightExist && armLeftExist && armRightExist && bodyExist) {
+		if (hatExist && headExist && legLeftExist && legRightExist && armLeftExist && armRightExist && bodyExist) {
 			return true;
 		}
 		return false;

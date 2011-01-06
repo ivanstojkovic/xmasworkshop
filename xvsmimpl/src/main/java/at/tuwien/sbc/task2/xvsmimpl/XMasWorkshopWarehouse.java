@@ -22,7 +22,7 @@ import at.tuwien.sbc.task2.worker.assembly.AssemblyGnome;
 import at.tuwien.sbc.task2.xvsmimpl.worker.AssemblyGnomeThread;
 import at.tuwien.sbc.task2.xwmodel.Body;
 import at.tuwien.sbc.task2.xwmodel.Hand;
-import at.tuwien.sbc.task2.xwmodel.Hat;
+import at.tuwien.sbc.task2.xwmodel.HatRed;
 import at.tuwien.sbc.task2.xwmodel.Head;
 import at.tuwien.sbc.task2.xwmodel.Leg;
 import at.tuwien.sbc.task2.xwmodel.TeddyBear;
@@ -94,15 +94,15 @@ public class XMasWorkshopWarehouse {
 
 	private static void startWorkers() {
 		for(int i = 0; i<nrAssemblyGnome; i++) {
-			new AssemblyGnomeThread(capi, new AssemblyGnome(), partContainer, teddyBearContainer);
+			new AssemblyGnomeThread().start();
 		}
 	}
 
 	private static void generateTestData() {
 		TeddyBear tb1 = new TeddyBear("ivan", new Head("h", "1", false), new Body("b", "2", true), new Hand("hl", "2", false), new Hand(
-				"hr", "3", false), new Leg("l1", "3", false), new Leg("l2", "4", true), new Hat("hat", "red", "5", false), true, false);
+				"hr", "3", false), new Leg("l1", "3", false), new Leg("l2", "4", true), new HatRed("hat", "5", false), true, false);
 		TeddyBear tb2 = new TeddyBear("ivan1", new Head("h1", "1", false), new Body("1b", "2", false), new Hand("h1l", "2", false),
-				new Hand("h1r", "3", false), new Leg("l11", "3", false), new Leg("l12", "4", false), new Hat("ha1t", "red", "5", false),
+				new Hand("h1r", "3", false), new Leg("l11", "3", false), new Leg("l12", "4", false), new HatRed("ha1t", "5", false),
 				false, true);
 		try {
 			Entry entry1 = new Entry(tb1, LabelCoordinator.newCoordinationData("teddyBear"));
