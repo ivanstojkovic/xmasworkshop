@@ -18,36 +18,36 @@ import org.mozartspaces.core.MzsCoreException;
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 import at.tuwien.sbc.task2.worker.assembly.AssemblyGnome;
 import at.tuwien.sbc.task2.xvsmimpl.XMasWorkshopWarehouse;
-import at.tuwien.sbc.task2.xwmodel.TeddyBearPart;
 
 public class AssemblyGnomeThread extends Thread {
 
-	private Logger logger = Logger.getLogger(AssemblyGnomeThread.class);
+	private static Logger logger = Logger.getLogger(AssemblyGnomeThread.class);
 
-	private AssemblyGnome assemblyGnome;
+	private static AssemblyGnome assemblyGnome;
 
-	private MzsCore core;
-	private Capi capi;
-	private ContainerReference partContainer;
-	private ContainerReference teddyBearContainer;
-	private URI uri;
+	private static MzsCore core;
+	private static Capi capi;
+	private static ContainerReference partContainer;
+	private static ContainerReference teddyBearContainer;
+	private static URI uri;
 
 	public AssemblyGnomeThread() {
 		assemblyGnome = new AssemblyGnome("AssemblyGnome_" + this.getName());
 		initMozartSpaces();
 	}
 
-	private void initMozartSpaces() {
+	public static void main(String[] args) {
+		new AssemblyGnomeThread().start();
+	}
+	
+	private static void initMozartSpaces() {
 		logger.info("init MozartSpaces");
 		try {
 			uri = new URI(XMasWorkshopWarehouse.SERVER_URI);
-			core = DefaultMzsCore.newInstance(9876);
+			core = DefaultMzsCore.newInstance(0);;
 			capi = new Capi(core);
-			partContainer = capi.createContainer("partsContainer", uri, MzsConstants.Container.UNBOUNDED,
-					Arrays.asList(new FifoCoordinator()), null, null);
-			teddyBearContainer = capi.createContainer("teddyBearContainer", uri, MzsConstants.Container.UNBOUNDED,
-					Arrays.asList(new LabelCoordinator()), null, null);
-
+			partContainer = capi.lookupContainer("partsContainer", uri, 0, null);
+			teddyBearContainer = capi.lookupContainer("teddyBearContainer", uri, 0 ,null);
 		} catch (MzsCoreException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {

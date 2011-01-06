@@ -1,11 +1,8 @@
 package at.tuwien.sbc.task2.xvsmimpl;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.mozartspaces.capi3.FifoCoordinator;
@@ -18,8 +15,6 @@ import org.mozartspaces.core.MzsConstants;
 import org.mozartspaces.core.MzsCore;
 import org.mozartspaces.core.MzsCoreException;
 
-import at.tuwien.sbc.task2.worker.assembly.AssemblyGnome;
-import at.tuwien.sbc.task2.xvsmimpl.worker.AssemblyGnomeThread;
 import at.tuwien.sbc.task2.xwmodel.Body;
 import at.tuwien.sbc.task2.xwmodel.Hand;
 import at.tuwien.sbc.task2.xwmodel.HatRed;
@@ -48,25 +43,6 @@ public class XMasWorkshopWarehouse {
 
 	public static void main(String[] args) {
 		initMozartSpaces();
-		initConfiguration();
-	}
-
-	private static void initConfiguration() {
-		logger.info("initConfiguration");
-		Properties props = new Properties();
-		FileInputStream fis;
-		try {
-			fis = new FileInputStream("xmaswarehouse.properties");
-			props.load(fis);
-			fis.close();
-			nrAssemblyGnome = Integer.parseInt(props.getProperty("worker.assemblyGnome.count"));
-			nrLogisticReindeer = Integer.parseInt(props.getProperty("worker.logisticReindeer.count"));
-			nrTestDwarf = Integer.parseInt(props.getProperty("worker.testDwarf.count"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	private static void initMozartSpaces() {
@@ -89,12 +65,6 @@ public class XMasWorkshopWarehouse {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-		}
-	}
-
-	private static void startWorkers() {
-		for(int i = 0; i<nrAssemblyGnome; i++) {
-			new AssemblyGnomeThread().start();
 		}
 	}
 
