@@ -1,5 +1,7 @@
 package at.tuwien.sbc.task2.interfaces;
 
+import at.tuwien.sbc.task2.xwmodel.TeddyBearPart;
+
 public interface TeddyPart extends XMasWorkshopEntry {
 
 	String getId();
@@ -13,5 +15,7 @@ public interface TeddyPart extends XMasWorkshopEntry {
 	boolean isDefective();
 
 	void setDefective(boolean defective);
+	
+	TeddyBearPart getTeddyPartType();
 
 }

@@ -94,7 +94,7 @@ public class XMasWorkshopWarehouse {
 
 	private static void startWorkers() {
 		for(int i = 0; i<nrAssemblyGnome; i++) {
-			new AssemblyGnomeThread(new AssemblyGnome(), partContainer, teddyBearContainer);
+			new AssemblyGnomeThread(capi, new AssemblyGnome(), partContainer, teddyBearContainer);
 		}
 	}
 
