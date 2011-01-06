@@ -33,6 +33,7 @@ public class AssemblyGnomeThread extends Thread {
 
     private AssemblyGnome assemblyGnome;
     private Random randomGen;
+    private boolean running;
 
     private MzsCore core;
     private Capi capi;
@@ -45,14 +46,23 @@ public class AssemblyGnomeThread extends Thread {
     private URI uri;
 
     public AssemblyGnomeThread() {
-        assemblyGnome = new AssemblyGnome("AssemblyGnome_" + this.getName());
+        assemblyGnome = new AssemblyGnome();
         randomGen = new Random();
+        running = true;
         initMozartSpaces();
     }
 
     //TODO pass id as argument....
     public static void main(String[] args) {
-        new AssemblyGnomeThread().start();
+        if (args.length != 1) {
+            System.err.println("Usage: java AssemblyGnomeThread [id]");
+            System.exit(1);
+        }
+        
+        AssemblyGnomeThread thread = new AssemblyGnomeThread();
+        thread.assemblyGnome.setId(args[0]);
+        thread.setName("AssemblyGnome_" + args[0]);
+        thread.start();
     }
 
     private void initMozartSpaces() {
@@ -75,7 +85,7 @@ public class AssemblyGnomeThread extends Thread {
     }
 
     public void run() {
-        while (true) {
+        while (running) {
 
             ArrayList<TeddyPart> foundTeddyParts = new ArrayList<TeddyPart>();
             ArrayList<TeddyPart> tmp = new ArrayList<TeddyPart>();
@@ -131,13 +141,13 @@ public class AssemblyGnomeThread extends Thread {
                 // do nothing;
             }
         }
+        
+        logger.info("Stopping Thread " + this.getName());
     }
 
     private TeddyBear assembleTeddy(ArrayList<TeddyPart> foundTeddyParts) {
-        final StringBuffer buffer = new StringBuffer();
         final TeddyBear teddy = new TeddyBear();
 
-        buffer.append("teddy_");
         for (TeddyPart part : foundTeddyParts) {
             TeddyBearPart type = part.getTeddyPartType();
 
@@ -148,23 +158,19 @@ public class AssemblyGnomeThread extends Thread {
                     } else {
                         teddy.setRightHand((Hand) part);
                     }
-                    buffer.append(part.getId());
                     break;
                 case BODY:
                     teddy.setBody((Body) part);
-                    buffer.append(part.getId());
                     break;
 
                 //no break on purpose!!!
                 case HAT_RED:
                 case HAT_GREEN:    
                     teddy.setHat((Hat) part);
-                    buffer.append(part.getId());
                     break;
 
                 case HEAD:
                     teddy.setHead((Head) part);
-                    buffer.append(part.getId());
                     break;
 
                 case LEG:
@@ -173,13 +179,12 @@ public class AssemblyGnomeThread extends Thread {
                     } else {
                         teddy.setRightLeg((Leg) part);
                     }
-                    buffer.append(part.getId());
                     break;
             }
         }
 
-        buffer.append("_r" + randomGen.nextInt(1000));
-        teddy.setId(buffer.toString());
+        
+        teddy.setId("teddy_" + assemblyGnome.getId() + "_r_" + randomGen.nextInt(10000));
         return teddy;
     }
 
