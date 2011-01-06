@@ -11,12 +11,6 @@ import at.tuwien.sbc.task2.connection.mozartspaces.MozartSpacesControllerReferen
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 import at.tuwien.sbc.task2.interfaces.XMasWorkshopEntry;
 import at.tuwien.sbc.task2.worker.production.ProductionElf;
-import at.tuwien.sbc.task2.xwmodel.Body;
-import at.tuwien.sbc.task2.xwmodel.Hand;
-import at.tuwien.sbc.task2.xwmodel.HatGreen;
-import at.tuwien.sbc.task2.xwmodel.HatRed;
-import at.tuwien.sbc.task2.xwmodel.Head;
-import at.tuwien.sbc.task2.xwmodel.Leg;
 import at.tuwien.sbc.task2.xwmodel.TeddyBear;
 
 public class CentralController implements Controller {
@@ -60,30 +54,7 @@ public class CentralController implements Controller {
 
 	@Override
 	public void writePart(ProductionElf elf, int partNr, boolean defect) {
-		TeddyPart objToWrite = null;
-		switch (elf.getFunction()) {
-		case ARM:
-			objToWrite = new Hand("arm_" + elf.getId() + "_" + partNr, elf.getId(), defect);
-			break;
-		case LEG:
-			objToWrite = new Leg("leg_" + elf.getId() + "_" + partNr, elf.getId(), defect);
-			break;
-		case HEAD:
-			objToWrite = new Head("head_" + elf.getId() + "_" + partNr, elf.getId(), defect);
-			break;
-		case BODY:
-			objToWrite = new Body("body_" + elf.getId() + "_" + partNr, elf.getId(), defect);
-			break;
-		case HAT_GREEN:
-			objToWrite = new HatGreen("hat_green_" + elf.getId() + "_" + partNr, elf.getId(), defect);
-			break;
-		case HAT_RED:
-			objToWrite = new HatRed("hat_red_" + elf.getId() + "_" + partNr, elf.getId(), defect);
-			break;
-		default:
-			break;
-		}
-		technologyInstance.write(objToWrite);
+		technologyInstance.writePart(elf, partNr, defect);
 	}
 
 	public static CentralController getInstance() {

@@ -8,8 +8,6 @@
 			<param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %-5p [%c{1}] %m%n" />
 		</layout>
 	</appender>
-
-
 	<logger name="org.mozartspaces">
 		<level value="INFO" />
 	</logger>
