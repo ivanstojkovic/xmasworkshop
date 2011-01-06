@@ -139,7 +139,13 @@ public class MozartSpacesControllerReference implements Controller {
                     entry = new Entry(objToWrite, FifoCoordinator.newCoordinationData());
                     capi.write(bodyContainer, entry);
                     break;
-                case HAT:
+                case HAT_RED:
+                    objToWrite = new Hat("hat_" + elf.getId() + "_" + partNr, elf.getId(),
+                            elf.getFunction().toString(), defect);
+                    entry = new Entry(objToWrite, FifoCoordinator.newCoordinationData());
+                    capi.write(hatContainer, entry);
+                    break;
+                case HAT_GREEN:
                     objToWrite = new Hat("hat_" + elf.getId() + "_" + partNr, elf.getId(),
                             elf.getFunction().toString(), defect);
                     entry = new Entry(objToWrite, FifoCoordinator.newCoordinationData());

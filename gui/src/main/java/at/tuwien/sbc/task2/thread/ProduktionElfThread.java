@@ -17,9 +17,12 @@ public class ProduktionElfThread extends Thread {
 
 	public void run() {
 		// each X part will be defective
-		int everyXDefective = elf.getErrorRate() * elf.getQuantity();
+	    double val =  ((double) elf.getErrorRate() * elf.getQuantity() / 100);
+		int everyXDefective = (int) Math.ceil(val);
+		logger.info(val + " defective: " + everyXDefective);
+		
 		for (int i = 0; i < elf.getQuantity(); i++) {
-			CentralController.getInstance().writePart(elf, i+1, ((i % everyXDefective == 0) ? true : false));
+			CentralController.getInstance().writePart(elf, i+1, ((i < everyXDefective) ? true : false));
 			logger.info("Elf " + elf.getId()+"_"+this.getName() + " created " + (i + 1) + "/" + elf.getQuantity() + " " + elf.getFunction() + "s");
 			try {
 				Thread.sleep(2000);

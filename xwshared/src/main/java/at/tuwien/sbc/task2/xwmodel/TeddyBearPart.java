@@ -1,26 +1,23 @@
 package at.tuwien.sbc.task2.xwmodel;
 
-import java.util.Random;
 
 public enum TeddyBearPart {
-	HEAD, BODY, ARM, LEG, HAT;
-	
-	private String[] colors = {"red", "green"};
-	
-	private Random random = new Random();
+	HEAD, BODY, ARM, LEG, HAT_RED, HAT_GREEN;
 	
 	public String toString() {
 	    switch (this) {
 	        case ARM:
-	            return "arm";
+	            return "Arm";
 	        case BODY:
-	            return "body";
-	        case HAT:
-	            return colors[random.nextInt(2)];
+	            return "Body";
+	        case HAT_RED:
+	            return "Red Hat";
+	        case HAT_GREEN:
+	            return "Green Hat";
 	        case HEAD:
-	            return "head";
+	            return "Head";
 	        case LEG: 
-	            return "leg";
+	            return "Leg";
 	        default:
 	            return "undefined";
 	    }

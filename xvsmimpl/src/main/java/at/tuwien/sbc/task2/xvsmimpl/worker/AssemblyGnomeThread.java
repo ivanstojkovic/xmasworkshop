@@ -154,7 +154,9 @@ public class AssemblyGnomeThread extends Thread {
                     buffer.append(part.getId());
                     break;
 
-                case HAT:
+                //no break on purpose!!!
+                case HAT_RED:
+                case HAT_GREEN:    
                     teddy.setHat((Hat) part);
                     buffer.append(part.getId());
                     break;
@@ -193,7 +195,9 @@ public class AssemblyGnomeThread extends Thread {
                 case HEAD:
                     headExist = true;
                     break;
-                case HAT:
+                //no break on purpose!!!
+                case HAT_RED:
+                case HAT_GREEN:    
                     hatExist = true;
                     break;
                 case LEG:

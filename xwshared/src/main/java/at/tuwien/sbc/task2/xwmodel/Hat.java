@@ -30,7 +30,7 @@ public class Hat implements TeddyPart {
 
 	@Override
 	public String toString() {
-		return "Hat [id=" + id + ", workerId=" + workerId + ", defective=" + defective + "]";
+		return "Hat [id=" + id + ", workerId=" + workerId + ", color=" + color + ", defective=" + defective + "]";
 	}
 
 	public String getProducerId() {
@@ -51,7 +51,11 @@ public class Hat implements TeddyPart {
 
 	@Override
 	public TeddyBearPart getTeddyPartType() {
-		return TeddyBearPart.HAT;
+		if (color.equals(TeddyBearPart.HAT_GREEN.name())) {
+		    return TeddyBearPart.HAT_GREEN;
+		}
+		
+		return TeddyBearPart.HAT_RED;
 	}
 
 }
