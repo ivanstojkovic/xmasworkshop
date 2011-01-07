@@ -103,7 +103,6 @@ public class AssemblyGnomeThread extends Thread {
             try {
                 
                 tx = capi.createTransaction(6000, uri);
-                boolean committed = false;
                 
                 tmp = capi.read(hatContainer, Arrays.asList(FifoCoordinator
                     .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
@@ -151,16 +150,12 @@ public class AssemblyGnomeThread extends Thread {
                         
                         capi.write(entry, teddyBearContainer, 5000, tx);
                         
-                        capi.commitTransaction(tx);
-                        committed = true;
                         
                         logger.info("Teddy with id [" + teddy.getId() + "] created.");
                     }
                 }
-                
-                if (!committed) {
-                    capi.commitTransaction(tx);
-                }
+
+                capi.commitTransaction(tx);
                 
             } catch (MzsCoreException e) {
                 logger.warn(e.getMessage());

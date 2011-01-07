@@ -15,4 +15,6 @@ public interface TeddyBearTest extends Serializable {
      * @return true if ok, false otherwise
      */
     boolean examine(TeddyBear bear);
+    
+    String getName();
 }
