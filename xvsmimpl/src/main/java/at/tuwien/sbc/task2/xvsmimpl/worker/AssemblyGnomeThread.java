@@ -32,13 +32,13 @@ import at.tuwien.sbc.task2.xwmodel.TeddyBear;
 import at.tuwien.sbc.task2.xwmodel.TeddyBearPart;
 
 public class AssemblyGnomeThread extends Thread {
-
+    
     private static Logger logger = Logger.getLogger(AssemblyGnomeThread.class);
-
+    
     private AssemblyGnome assemblyGnome;
     private Random randomGen;
     private boolean running;
-
+    
     private MzsCore core;
     private Capi capi;
     private ContainerReference hatContainer;
@@ -51,15 +51,15 @@ public class AssemblyGnomeThread extends Thread {
     private TransactionReference tx;
     
     private TeddyBear cratedTeddy;
-
+    
     public AssemblyGnomeThread() {
         assemblyGnome = new AssemblyGnome();
         randomGen = new Random();
         running = true;
         initMozartSpaces();
     }
-
-    //TODO pass id as argument....
+    
+    // TODO pass id as argument....
     public static void main(String[] args) {
         if (args.length != 1) {
             System.err.println("Usage: java AssemblyGnomeThread [id]");
@@ -71,7 +71,7 @@ public class AssemblyGnomeThread extends Thread {
         thread.setName("AssemblyGnome_" + args[0]);
         thread.start();
     }
-
+    
     private void initMozartSpaces() {
         logger.info("init MozartSpaces");
         try {
@@ -93,89 +93,102 @@ public class AssemblyGnomeThread extends Thread {
             e.printStackTrace();
         }
     }
-
+    
     public void run() {
         while (running) {
-
+            
             ArrayList<TeddyPart> foundTeddyParts = new ArrayList<TeddyPart>();
             ArrayList<TeddyPart> tmp = new ArrayList<TeddyPart>();
-
+            
             try {
-            	
-            	tx = capi.createTransaction(6000, uri);
-            	
+                
+                tx = capi.createTransaction(6000, uri);
+                boolean committed = false;
+                
                 tmp = capi.read(hatContainer, Arrays.asList(FifoCoordinator
-                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
+                    .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
                 foundTeddyParts.addAll(tmp);
-
+                
                 tmp = capi.read(headContainer, Arrays.asList(FifoCoordinator
-                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
+                    .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
                 foundTeddyParts.addAll(tmp);
-
+                
                 tmp = capi.read(bodyContainer, Arrays.asList(FifoCoordinator
-                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
+                    .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
                 foundTeddyParts.addAll(tmp);
-
+                
                 tmp = capi.read(armContainer, Arrays.asList(FifoCoordinator
-                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
+                    .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
                 foundTeddyParts.addAll(tmp);
-
+                
                 tmp = capi.read(legContainer, Arrays.asList(FifoCoordinator
-                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
+                    .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
                 foundTeddyParts.addAll(tmp);
-
-                logger.info("found " + foundTeddyParts.size() + " TeddyParts");
-
+                
+                logger.info(this.assemblyGnome.getId() + " found " + foundTeddyParts.size() + " TeddyParts");
+                
                 if (foundTeddyParts.size() > 0) {
                     if (allPartForTeddyBearThere(foundTeddyParts)) {
                         TeddyBear teddy = this.assembleTeddy(foundTeddyParts);
                         Entry entry = new Entry(teddy, LabelCoordinator.newCoordinationData("teddyBear"));
                         // pass the same transaction if possible if not commit
                         // and pass a new one
-
-                        capi.delete(hatContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getHat().getId())), 0, tx);
-                        capi.delete(headContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getHead().getId())), 0, tx);
-                        capi.delete(bodyContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getBody().getId())), 0, tx);
-                        capi.delete(armContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getLeftHand().getId())), 0, tx);
-                        capi.delete(armContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getRightHand().getId())), 0, tx);
-                        capi.delete(legContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getLeftLeg().getId())), 0, tx);
-                        capi.delete(legContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getRightLeg().getId())), 0, tx);
+                        
+                        capi.delete(hatContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getHat().getId())), 0,
+                            tx);
+                        capi.delete(headContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getHead().getId())),
+                            0, tx);
+                        capi.delete(bodyContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getBody().getId())),
+                            0, tx);
+                        capi.delete(armContainer, Arrays
+                            .asList(KeyCoordinator.newSelector(teddy.getLeftHand().getId())), 0, tx);
+                        capi.delete(armContainer, Arrays.asList(KeyCoordinator
+                            .newSelector(teddy.getRightHand().getId())), 0, tx);
+                        capi.delete(legContainer,
+                            Arrays.asList(KeyCoordinator.newSelector(teddy.getLeftLeg().getId())), 0, tx);
+                        capi.delete(legContainer, Arrays
+                            .asList(KeyCoordinator.newSelector(teddy.getRightLeg().getId())), 0, tx);
                         
                         capi.write(entry, teddyBearContainer, 5000, tx);
-                      
+                        
                         capi.commitTransaction(tx);
+                        committed = true;
                         
                         logger.info("Teddy with id [" + teddy.getId() + "] created.");
                     }
                 }
-
+                
+                if (!committed) {
+                    capi.commitTransaction(tx);
+                }
+                
             } catch (MzsCoreException e) {
-            	logger.warn(e.getMessage());
+                logger.warn(e.getMessage());
                 try {
-					capi.rollbackTransaction(tx);
-				} catch (MzsCoreException e1) {
-					logger.error(e1.getMessage());
-				}
+                    capi.rollbackTransaction(tx);
+                } catch (MzsCoreException e1) {
+                    logger.error(e1.getMessage());
+                }
             }
             
             try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         
         logger.info("Stopping Thread " + this.getName());
     }
-
+    
     private TeddyBear assembleTeddy(ArrayList<TeddyPart> foundTeddyParts) {
         final TeddyBear teddy = new TeddyBear();
-        teddy.setDefective(false); //not defective, testing will determine...
-
+        teddy.setDefective(false); // not defective, testing will determine...
+        
         for (TeddyPart part : foundTeddyParts) {
             TeddyBearPart type = part.getTeddyPartType();
-
+            
             switch (type) {
                 case ARM:
                     if (teddy.getLeftHand() == null) {
@@ -187,17 +200,17 @@ public class AssemblyGnomeThread extends Thread {
                 case BODY:
                     teddy.setBody((Body) part);
                     break;
-
-                //no break on purpose!!!
+                
+                // no break on purpose!!!
                 case HAT_RED:
-                case HAT_GREEN:    
+                case HAT_GREEN:
                     teddy.setHat((Hat) part);
                     break;
-
+                
                 case HEAD:
                     teddy.setHead((Head) part);
                     break;
-
+                
                 case LEG:
                     if (teddy.getLeftLeg() == null) {
                         teddy.setLeftLeg((Leg) part);
@@ -207,12 +220,11 @@ public class AssemblyGnomeThread extends Thread {
                     break;
             }
         }
-
         
         teddy.setId("teddy_" + assemblyGnome.getId() + "_r_" + randomGen.nextInt(10000));
         return teddy;
     }
-
+    
     private boolean allPartForTeddyBearThere(ArrayList<TeddyPart> foundTeddyParts) {
         boolean hatExist = false;
         boolean headExist = false;
@@ -226,9 +238,9 @@ public class AssemblyGnomeThread extends Thread {
                 case HEAD:
                     headExist = true;
                     break;
-                //no break on purpose!!!
+                // no break on purpose!!!
                 case HAT_RED:
-                case HAT_GREEN:    
+                case HAT_GREEN:
                     hatExist = true;
                     break;
                 case LEG:
@@ -257,5 +269,5 @@ public class AssemblyGnomeThread extends Thread {
         }
         return false;
     }
-
+    
 }
