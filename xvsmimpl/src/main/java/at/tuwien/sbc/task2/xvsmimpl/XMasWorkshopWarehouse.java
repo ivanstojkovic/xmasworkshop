@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 import org.mozartspaces.capi3.FifoCoordinator;
+import org.mozartspaces.capi3.KeyCoordinator;
 import org.mozartspaces.capi3.LabelCoordinator;
 import org.mozartspaces.core.Capi;
 import org.mozartspaces.core.ContainerReference;
@@ -53,17 +54,17 @@ public class XMasWorkshopWarehouse {
 			core = DefaultMzsCore.newInstance(9876);
 			capi = new Capi(core);
 			hatContainer = capi.createContainer("hatContainer", uri, MzsConstants.Container.UNBOUNDED,
-					Arrays.asList(new FifoCoordinator()), null, null);
+					Arrays.asList(new KeyCoordinator(), new FifoCoordinator()), null, null);
 			headContainer = capi.createContainer("headContainer", uri, MzsConstants.Container.UNBOUNDED,
-                    Arrays.asList(new FifoCoordinator()), null, null);
+                    Arrays.asList(new KeyCoordinator(), new FifoCoordinator()), null, null);
 			bodyContainer = capi.createContainer("bodyContainer", uri, MzsConstants.Container.UNBOUNDED,
-                    Arrays.asList(new FifoCoordinator()), null, null);
+                    Arrays.asList(new KeyCoordinator(), new FifoCoordinator()), null, null);
 			armContainer = capi.createContainer("armContainer", uri, MzsConstants.Container.UNBOUNDED,
-                    Arrays.asList(new FifoCoordinator()), null, null);
+                    Arrays.asList(new KeyCoordinator(), new FifoCoordinator()), null, null);
 			legContainer = capi.createContainer("legContainer", uri, MzsConstants.Container.UNBOUNDED,
-                    Arrays.asList(new FifoCoordinator()), null, null);
+                    Arrays.asList(new KeyCoordinator(), new FifoCoordinator()), null, null);
 			teddyBearContainer = capi.createContainer("teddyBearContainer", uri, MzsConstants.Container.UNBOUNDED,
-					Arrays.asList(new LabelCoordinator()), null, null);
+					Arrays.asList(new LabelCoordinator(), new FifoCoordinator()), null, null);
 
 			generateTestData();
 			

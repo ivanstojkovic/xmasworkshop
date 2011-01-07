@@ -8,13 +8,17 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.mozartspaces.capi3.FifoCoordinator;
+import org.mozartspaces.capi3.KeyCoordinator;
 import org.mozartspaces.capi3.LabelCoordinator;
 import org.mozartspaces.core.Capi;
 import org.mozartspaces.core.ContainerReference;
 import org.mozartspaces.core.DefaultMzsCore;
 import org.mozartspaces.core.Entry;
+import org.mozartspaces.core.MzsConstants;
 import org.mozartspaces.core.MzsCore;
 import org.mozartspaces.core.MzsCoreException;
+import org.mozartspaces.core.TransactionReference;
+import org.mozartspaces.core.requests.TransactionalRequest;
 
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 import at.tuwien.sbc.task2.worker.assembly.AssemblyGnome;
@@ -44,6 +48,9 @@ public class AssemblyGnomeThread extends Thread {
     private ContainerReference legContainer;
     private ContainerReference teddyBearContainer;
     private URI uri;
+    private TransactionReference tx;
+    
+    private TeddyBear cratedTeddy;
 
     public AssemblyGnomeThread() {
         assemblyGnome = new AssemblyGnome();
@@ -77,6 +84,9 @@ public class AssemblyGnomeThread extends Thread {
             armContainer = capi.lookupContainer("armContainer", uri, 0, null);
             legContainer = capi.lookupContainer("legContainer", uri, 0, null);
             teddyBearContainer = capi.lookupContainer("teddyBearContainer", uri, 0, null);
+            
+            tx = capi.createTransaction(10000, uri);
+            
         } catch (MzsCoreException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
@@ -91,25 +101,27 @@ public class AssemblyGnomeThread extends Thread {
             ArrayList<TeddyPart> tmp = new ArrayList<TeddyPart>();
 
             try {
-                // TODO set transaction
+            	
+            	tx = capi.createTransaction(6000, uri);
+            	
                 tmp = capi.read(hatContainer, Arrays.asList(FifoCoordinator
-                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, null);
+                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
                 foundTeddyParts.addAll(tmp);
 
                 tmp = capi.read(headContainer, Arrays.asList(FifoCoordinator
-                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, null);
+                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
                 foundTeddyParts.addAll(tmp);
 
                 tmp = capi.read(bodyContainer, Arrays.asList(FifoCoordinator
-                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, null);
+                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
                 foundTeddyParts.addAll(tmp);
 
                 tmp = capi.read(armContainer, Arrays.asList(FifoCoordinator
-                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, null);
+                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
                 foundTeddyParts.addAll(tmp);
 
                 tmp = capi.read(legContainer, Arrays.asList(FifoCoordinator
-                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, null);
+                        .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, tx);
                 foundTeddyParts.addAll(tmp);
 
                 logger.info("found " + foundTeddyParts.size() + " TeddyParts");
@@ -120,26 +132,38 @@ public class AssemblyGnomeThread extends Thread {
                         Entry entry = new Entry(teddy, LabelCoordinator.newCoordinationData("teddyBear"));
                         // pass the same transaction if possible if not commit
                         // and pass a new one
-                        capi.write(teddyBearContainer, entry);
 
-                        capi.delete(hatContainer, Arrays.asList(FifoCoordinator.newSelector(1)), 0, null);
-                        capi.delete(headContainer, Arrays.asList(FifoCoordinator.newSelector(1)), 0, null);
-                        capi.delete(bodyContainer, Arrays.asList(FifoCoordinator.newSelector(1)), 0, null);
-                        capi.delete(armContainer, Arrays.asList(FifoCoordinator.newSelector(2)), 0, null);
-                        capi.delete(legContainer, Arrays.asList(FifoCoordinator.newSelector(2)), 0, null);
-                        // TODO commit transaction;
+                        capi.delete(hatContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getHat().getId())), 0, tx);
+                        capi.delete(headContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getHead().getId())), 0, tx);
+                        capi.delete(bodyContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getBody().getId())), 0, tx);
+                        capi.delete(armContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getLeftHand().getId())), 0, tx);
+                        capi.delete(armContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getRightHand().getId())), 0, tx);
+                        capi.delete(legContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getLeftLeg().getId())), 0, tx);
+                        capi.delete(legContainer, Arrays.asList(KeyCoordinator.newSelector(teddy.getRightLeg().getId())), 0, tx);
+                        
+                        capi.write(entry, teddyBearContainer, 5000, tx);
+                      
+                        capi.commitTransaction(tx);
                         
                         logger.info("Teddy with id [" + teddy.getId() + "] created.");
                     }
                 }
 
-                Thread.sleep(3000);
-
             } catch (MzsCoreException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                // do nothing;
+            	logger.warn(e.getMessage());
+                try {
+					capi.rollbackTransaction(tx);
+				} catch (MzsCoreException e1) {
+					logger.error(e1.getMessage());
+				}
             }
+            
+            try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
         
         logger.info("Stopping Thread " + this.getName());

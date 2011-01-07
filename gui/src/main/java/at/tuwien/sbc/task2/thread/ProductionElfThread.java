@@ -5,14 +5,15 @@ import org.apache.log4j.Logger;
 import at.tuwien.sbc.task2.connection.CentralController;
 import at.tuwien.sbc.task2.worker.production.ProductionElf;
 
-public class ProduktionElfThread extends Thread {
+public class ProductionElfThread extends Thread {
 
-	private static Logger logger = Logger.getLogger(ProduktionElfThread.class);
+	private static Logger logger = Logger.getLogger(ProductionElfThread.class);
 
 	private ProductionElf elf;
 
-	public ProduktionElfThread(ProductionElf elf) {
+	public ProductionElfThread(ProductionElf elf) {
 		this.elf = elf;
+		this.elf.setId(elf.getId()+"_"+this.getName());
 	}
 
 	public void run() {
@@ -21,7 +22,7 @@ public class ProduktionElfThread extends Thread {
 		
 		for (int i = 0; i < elf.getQuantity(); i++) {
 			CentralController.getInstance().writePart(elf, i+1, ((i < everyXDefective) ? true : false));
-			logger.info("Elf " + elf.getId()+"_"+this.getName() + " created " + (i + 1) + "/" + elf.getQuantity() + " " + elf.getFunction() + "s");
+			logger.info("Elf " + elf.getId() + " created " + (i + 1) + "/" + elf.getQuantity() + " " + elf.getFunction() + "s");
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

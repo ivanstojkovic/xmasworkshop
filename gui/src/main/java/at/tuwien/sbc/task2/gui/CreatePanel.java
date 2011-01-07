@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
 
-import at.tuwien.sbc.task2.thread.ProduktionElfThread;
+import at.tuwien.sbc.task2.thread.ProductionElfThread;
 import at.tuwien.sbc.task2.worker.production.ProductionElf;
 import at.tuwien.sbc.task2.xwmodel.TeddyBearPart;
 
@@ -153,7 +153,7 @@ public class CreatePanel extends javax.swing.JPanel implements ActionListener, C
                         errorRateTextField.setForeground(Color.RED);
                         errorRateTextField.setText("100");
                     }
-                    new ProduktionElfThread(new ProductionElf(elfNameTextField.getText(), errRate,
+                    new ProductionElfThread(new ProductionElf(elfNameTextField.getText(), errRate,
                             (TeddyBearPart) partComboBox.getSelectedItem(), count)).start();
                 } else {
                     countTextField.setBackground(Color.RED);

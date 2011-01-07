@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.mozartspaces.capi3.FifoCoordinator;
+import org.mozartspaces.capi3.KeyCoordinator;
 import org.mozartspaces.capi3.LabelCoordinator;
 import org.mozartspaces.core.Capi;
 import org.mozartspaces.core.ContainerReference;
@@ -75,7 +76,7 @@ public class MozartSpacesControllerReference implements Controller {
 
     public void write(XMasWorkshopEntry o) {
         try {
-            Entry entry = new Entry(o, FifoCoordinator.newCoordinationData());
+            Entry entry = new Entry(o, KeyCoordinator.newCoordinationData(o.getId()));
 
             if (o instanceof TeddyBear) {
                 capi.write(teddyBearContainer, entry);
@@ -120,34 +121,34 @@ public class MozartSpacesControllerReference implements Controller {
             switch (elf.getFunction()) {
                 case ARM:
                     objToWrite = new Hand("arm_" + elf.getId() + "_" + partNr, elf.getId(), defect);
-                    entry = new Entry(objToWrite, FifoCoordinator.newCoordinationData());
+                    entry = new Entry(objToWrite, KeyCoordinator.newCoordinationData("arm_" + elf.getId() + "_" + partNr));
                     capi.write(armContainer, entry);
                     break;
                 case LEG:
                     objToWrite = new Leg("leg_" + elf.getId() + "_" + partNr, elf.getId(), defect);
-                    entry = new Entry(objToWrite, FifoCoordinator.newCoordinationData());
+                    entry = new Entry(objToWrite, KeyCoordinator.newCoordinationData("leg_" + elf.getId() + "_" + partNr));
                     capi.write(legContainer, entry);
                     break;
                 case HEAD:
                     objToWrite = new Head("head_" + elf.getId() + "_" + partNr, elf.getId(), defect);
-                    entry = new Entry(objToWrite, FifoCoordinator.newCoordinationData());
+                    entry = new Entry(objToWrite, KeyCoordinator.newCoordinationData("head_" + elf.getId() + "_" + partNr));
                     capi.write(headContainer, entry);
                     break;
                 case BODY:
                     objToWrite = new Body("body_" + elf.getId() + "_" + partNr, elf.getId(), defect);
-                    entry = new Entry(objToWrite, FifoCoordinator.newCoordinationData());
+                    entry = new Entry(objToWrite, KeyCoordinator.newCoordinationData("body_" + elf.getId() + "_" + partNr));
                     capi.write(bodyContainer, entry);
                     break;
                 case HAT_RED:
                     objToWrite = new Hat("hat_" + elf.getId() + "_" + partNr, elf.getId(),
                             elf.getFunction().toString(), defect);
-                    entry = new Entry(objToWrite, FifoCoordinator.newCoordinationData());
+                    entry = new Entry(objToWrite, KeyCoordinator.newCoordinationData("hat_" + elf.getId() + "_" + partNr));
                     capi.write(hatContainer, entry);
                     break;
                 case HAT_GREEN:
                     objToWrite = new Hat("hat_" + elf.getId() + "_" + partNr, elf.getId(),
                             elf.getFunction().toString(), defect);
-                    entry = new Entry(objToWrite, FifoCoordinator.newCoordinationData());
+                    entry = new Entry(objToWrite, KeyCoordinator.newCoordinationData("hat_" + elf.getId() + "_" + partNr));
                     capi.write(hatContainer, entry);
                     break;
                 default:
