@@ -53,7 +53,6 @@ public class TestDwarfThread extends Thread {
             try {
                 tx = capi.createTransaction(10000, uri);
                 
-                //DANGER
                 ArrayList<TeddyBear> teddies = capi.take(this.teddyBearContainer, Arrays.asList(RandomCoordinator.newSelector(1)), 5000, tx);
                 capi.commitTransaction(tx);
                 taken = true;
@@ -66,7 +65,6 @@ public class TestDwarfThread extends Thread {
                         boolean allTestsDone = true;
                         for (String test : tests.keySet()) {
                             if (tests.get(test) == null && test.equals(testDwarf.getTest().getName())) {
-                                logger.info(test + " " + testDwarf.getTest().getName());
                                 logger.info("Test [" + test + "] not done yet on teddy [" + t.getId() + "], performing");
                                 boolean examination = this.testDwarf.getTest().examine(t);
                                 t.getDoneTests().put(test, examination);
