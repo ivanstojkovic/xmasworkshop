@@ -5,7 +5,6 @@ import java.util.Map;
 
 import at.tuwien.sbc.task2.interfaces.XMasWorkshopEntry;
 import at.tuwien.sbc.task2.worker.testing.ComponentTest;
-import at.tuwien.sbc.task2.worker.testing.TeddyBearTest;
 import at.tuwien.sbc.task2.worker.testing.WeightTest;
 
 public class TeddyBear implements XMasWorkshopEntry {
@@ -146,8 +145,9 @@ public class TeddyBear implements XMasWorkshopEntry {
     
     @Override
     public String toString() {
-        return "TeddyBear [id=" + id + ", head=" + head + ", body=" + body + ", leftHand=" + leftHand + ", rightHand="
-            + rightHand + ", leftLeg=" + leftLeg + ", rightLeg=" + rightLeg + ", hat=" + hat + ", defective="
-            + defective + ", ready=" + ready + "]";
+        return "TeddyBear [id=" + id + "]";
+//        , head=" + head + ", body=" + body + ", leftHand=" + leftHand + ", rightHand="
+//            + rightHand + ", leftLeg=" + leftLeg + ", rightLeg=" + rightLeg + ", hat=" + hat + ", defective="
+//            + defective + ", ready=" + ready + "]";
     }
 }

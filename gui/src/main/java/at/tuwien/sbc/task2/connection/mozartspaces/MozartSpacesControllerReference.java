@@ -9,7 +9,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.mozartspaces.capi3.FifoCoordinator;
 import org.mozartspaces.capi3.KeyCoordinator;
-import org.mozartspaces.capi3.LabelCoordinator;
 import org.mozartspaces.core.Capi;
 import org.mozartspaces.core.ContainerReference;
 import org.mozartspaces.core.DefaultMzsCore;
@@ -44,6 +43,8 @@ public class MozartSpacesControllerReference implements Controller {
     private ContainerReference armContainer;
     private ContainerReference legContainer;
     private ContainerReference teddyBearContainer;
+    private ContainerReference logisticsContainer;
+    private ContainerReference defectiveContainer;
     private URI uri;
     
     private MozartSpacesControllerReference() {
@@ -63,6 +64,8 @@ public class MozartSpacesControllerReference implements Controller {
             armContainer = capi.lookupContainer("armContainer", uri, 0, null);
             legContainer = capi.lookupContainer("legContainer", uri, 0, null);
             teddyBearContainer = capi.lookupContainer("teddyBearContainer", uri, 0, null);
+            logisticsContainer = capi.lookupContainer("logisticsContainer", uri, 0, null);
+            defectiveContainer = capi.lookupContainer("defectiveContainer", uri, 0, null);
         } catch (MzsCoreException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
@@ -209,6 +212,32 @@ public class MozartSpacesControllerReference implements Controller {
             e.printStackTrace();
         }
         return foundTeddyParts;
+    }
+
+    @Override
+    public List<TeddyBear> findDefectiveTeddyBears() {
+        ArrayList<TeddyBear> foundTeddyBears = new ArrayList<TeddyBear>();
+        try {
+            foundTeddyBears = capi.read(defectiveContainer, Arrays.asList(FifoCoordinator
+                .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, null);
+            logger.info("found " + foundTeddyBears.size() + " TeddyBears");
+        } catch (MzsCoreException e) {
+            e.printStackTrace();
+        }
+        return foundTeddyBears;
+    }
+
+    @Override
+    public List<TeddyBear> findReadyTeddyBears() {
+        ArrayList<TeddyBear> foundTeddyBears = new ArrayList<TeddyBear>();
+        try {
+            foundTeddyBears = capi.read(logisticsContainer, Arrays.asList(FifoCoordinator
+                .newSelector(FifoCoordinator.FifoSelector.COUNT_ALL)), 0, null);
+            logger.info("found " + foundTeddyBears.size() + " TeddyBears");
+        } catch (MzsCoreException e) {
+            e.printStackTrace();
+        }
+        return foundTeddyBears;
     }
     
 }

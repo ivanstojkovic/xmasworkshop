@@ -68,7 +68,10 @@ public class XMasWorkshopWarehouse {
             teddyBearContainer = capi.createContainer("teddyBearContainer", uri, MzsConstants.Container.UNBOUNDED,
                 Arrays.asList(new FifoCoordinator(), new LabelCoordinator(), new RandomCoordinator(), new KeyCoordinator()), null, null);
             logisticsContainer = capi.createContainer("logisticsContainer", uri, MzsConstants.Container.UNBOUNDED,
-                Arrays.asList(new KeyCoordinator()), null, null);
+                Arrays.asList(new FifoCoordinator(), new KeyCoordinator()), null, null);
+            defectiveContainer = capi.createContainer("defectiveContainer", uri, MzsConstants.Container.UNBOUNDED,
+                    Arrays.asList(new FifoCoordinator(), new KeyCoordinator()), null, null);
+            
             
             generateTestData();
             

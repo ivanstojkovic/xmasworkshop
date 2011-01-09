@@ -52,5 +52,17 @@ public class WebServiceControllerReference implements Controller {
 		return null;
 	}
 
+    @Override
+    public List<TeddyBear> findDefectiveTeddyBears() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<TeddyBear> findReadyTeddyBears() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
 }
