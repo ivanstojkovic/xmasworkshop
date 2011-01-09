@@ -50,8 +50,6 @@ public class AssemblyGnomeThread extends Thread {
     private URI uri;
     private TransactionReference tx;
     
-    private TeddyBear cratedTeddy;
-    
     public AssemblyGnomeThread() {
         assemblyGnome = new AssemblyGnome();
         randomGen = new Random();
@@ -59,7 +57,6 @@ public class AssemblyGnomeThread extends Thread {
         initMozartSpaces();
     }
     
-    // TODO pass id as argument....
     public static void main(String[] args) {
         if (args.length != 1) {
             System.err.println("Usage: java AssemblyGnomeThread [id]");

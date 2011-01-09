@@ -3,10 +3,13 @@ package at.tuwien.sbc.task2.xwmodel;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.mozartspaces.capi3.Queryable;
+
 import at.tuwien.sbc.task2.interfaces.XMasWorkshopEntry;
 import at.tuwien.sbc.task2.worker.testing.ComponentTest;
 import at.tuwien.sbc.task2.worker.testing.WeightTest;
 
+@Queryable(autoindex = true)
 public class TeddyBear implements XMasWorkshopEntry {
     
     private static final long serialVersionUID = 3114700564168942855L;
@@ -27,14 +30,14 @@ public class TeddyBear implements XMasWorkshopEntry {
     
     private Hat hat;
     
-    private boolean defective;
+    private Boolean defective;
     
-    private boolean ready;
+    private Boolean ready;
     
     private Map<String, Boolean> doneTests;
     
     public TeddyBear(String id, Head head, Body body, Hand leftHand, Hand rightHand, Leg leftLeg, Leg rightLeg,
-        Hat hat, boolean defective, boolean ready) {
+        Hat hat, Boolean defective, Boolean ready) {
         super();
         this.id = id;
         this.head = head;

@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.mozartspaces.capi3.FifoCoordinator;
 import org.mozartspaces.capi3.KeyCoordinator;
 import org.mozartspaces.capi3.LabelCoordinator;
+import org.mozartspaces.capi3.LindaCoordinator;
 import org.mozartspaces.capi3.RandomCoordinator;
 import org.mozartspaces.core.Capi;
 import org.mozartspaces.core.ContainerReference;
@@ -68,7 +69,7 @@ public class XMasWorkshopWarehouse {
             teddyBearContainer = capi.createContainer("teddyBearContainer", uri, MzsConstants.Container.UNBOUNDED,
                 Arrays.asList(new FifoCoordinator(), new LabelCoordinator(), new RandomCoordinator(), new KeyCoordinator()), null, null);
             logisticsContainer = capi.createContainer("logisticsContainer", uri, MzsConstants.Container.UNBOUNDED,
-                Arrays.asList(new FifoCoordinator(), new KeyCoordinator()), null, null);
+                Arrays.asList(new FifoCoordinator(), new KeyCoordinator(), new LindaCoordinator()), null, null);
             defectiveContainer = capi.createContainer("defectiveContainer", uri, MzsConstants.Container.UNBOUNDED,
                     Arrays.asList(new FifoCoordinator(), new KeyCoordinator()), null, null);
             
@@ -85,12 +86,12 @@ public class XMasWorkshopWarehouse {
     }
     
     private static void generateTestData() {
-        TeddyBear tb1 = new TeddyBear("ivan", new Head("h", "1", false), new Body("b", "2", true), new Hand("hl", "2",
-            false), new Hand("hr", "3", false), new Leg("l1", "3", false), new Leg("l2", "4", true), new Hat("hat",
-            "5", "red", false), true, false);
+        TeddyBear tb1 = new TeddyBear("ivan", new Head("h", "1", false), new Body("b", "2", false), new Hand("hl", "2",
+            false), new Hand("hr", "3", false), new Leg("l1", "3", false), new Leg("l2", "4", false), new Hat("hat",
+            "5", "red", false), false, false);
         TeddyBear tb2 = new TeddyBear("ivan1", new Head("h1", "1", false), new Body("1b", "2", false), new Hand("h1l",
-            "2", false), new Hand("h1r", "3", false), new Leg("l11", "3", false), new Leg("l12", "4", false), new Hat(
-            "ha1t", "5", "green", false), false, true);
+            "2", false), new Hand("h1r", "3", false), new Leg("l11", "3", true), new Leg("l12", "4", false), new Hat(
+            "ha1t", "5", "green", false), false, false);
         try {
             Entry entry1 = new Entry(tb1, Arrays.asList(KeyCoordinator.newCoordinationData(tb1.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
             Entry entry2 = new Entry(tb2, Arrays.asList(KeyCoordinator.newCoordinationData(tb2.getId()), LabelCoordinator.newCoordinationData("teddyBear")));

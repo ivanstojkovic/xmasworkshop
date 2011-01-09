@@ -11,7 +11,11 @@
 	<logger name="org.mozartspaces">
 		<level value="INFO" />
 	</logger>
+	<logger name="o.m">
+		<level value="WARN" />
+	</logger>
 	<root>
+		<priority value ="INFO" />
 		<appender-ref ref="CONSOLE" />
 	</root>
 </log4j:configuration>

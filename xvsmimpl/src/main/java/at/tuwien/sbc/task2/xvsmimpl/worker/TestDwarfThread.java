@@ -48,16 +48,15 @@ public class TestDwarfThread extends Thread {
     
     public void run() {
         while (running) {
-            logger.info("RUNNING");
             TransactionReference tx = null;
             try {
                 tx = capi.createTransaction(10000, uri);
                 
                 ArrayList<TeddyBear> teddies = capi.take(this.teddyBearContainer, Arrays.asList(RandomCoordinator.newSelector(1)), 5000, tx);
                 capi.commitTransaction(tx);
-                taken = true;
               
                 if (teddies.size() > 0) {
+                    taken = true;
                     for (TeddyBear t : teddies) {
                         current = t;
                         
@@ -87,6 +86,7 @@ public class TestDwarfThread extends Thread {
                         Entry entry = new Entry(t, Arrays.asList(KeyCoordinator.newCoordinationData(t.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
                         capi.write(entry, this.teddyBearContainer);
                         taken = false;
+                        current = null;
                         logger.info("written");
                         
                         if (allTestsDone) {
@@ -106,8 +106,12 @@ public class TestDwarfThread extends Thread {
             } catch (MzsCoreException e) {
                 logger.warn(e.getMessage());
                 try {
-                    if (tx != null)
+                    if (tx != null) {
                         capi.rollbackTransaction(tx);
+                        if (taken && current == null) {
+                            taken = false;
+                        }
+                    }
                 } catch (MzsCoreException e1) {
                     logger.error(e1.getMessage());
                 }
@@ -125,8 +129,12 @@ public class TestDwarfThread extends Thread {
     
     private void releaseTeddy() {
         try {
-            Entry entry = new Entry(current, Arrays.asList(KeyCoordinator.newCoordinationData(current.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
-            capi.write(this.teddyBearContainer, 5000, null, entry);
+            if (current != null) {
+                Entry entry = new Entry(current, Arrays.asList(KeyCoordinator.newCoordinationData(current.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
+                capi.write(this.teddyBearContainer, 5000, null, entry);
+            } else {
+                logger.warn("Entry is most likely in space, please check");
+            }
         } catch (MzsCoreException e) {
             e.printStackTrace();
         }

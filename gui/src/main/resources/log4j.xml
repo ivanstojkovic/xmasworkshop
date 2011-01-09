@@ -11,6 +11,9 @@
 	<logger name="org.mozartspaces">
 		<level value="INFO" />
 	</logger>
+	<logger name="o.m">
+		<level value="WARN" />
+	</logger>
 	<root>
 		<appender-ref ref="CONSOLE" />
 	</root>
