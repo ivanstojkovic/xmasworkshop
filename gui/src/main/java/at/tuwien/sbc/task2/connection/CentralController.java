@@ -64,6 +64,14 @@ public class CentralController implements Controller {
 	public List<TeddyBear> findTeddyBears() {
 		return technologyInstance.findTeddyBears();
 	}
+	
+	public List<TeddyBear> findReadyTeddyBears() {
+	    return technologyInstance.findReadyTeddyBears();
+	}
+	
+	public List<TeddyBear> findDefectiveTeddyBears() {
+	    return technologyInstance.findDefectiveTeddyBears();
+	}
 
 	@Override
 	public List<TeddyPart> findTeddyParts() {

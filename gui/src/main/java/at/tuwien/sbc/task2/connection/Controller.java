@@ -12,4 +12,6 @@ public interface Controller {
 	void writePart(ProductionElf elf, int partNr, boolean defect);
 	List<TeddyBear> findTeddyBears();
 	List<TeddyPart> findTeddyParts();
+    List<TeddyBear> findReadyTeddyBears();
+    List<TeddyBear> findDefectiveTeddyBears();
 }
