@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.BorderFactory;
 
 import javax.swing.DefaultComboBoxModel;
@@ -145,17 +148,29 @@ public class TeddyBearOverviewPanel extends javax.swing.JPanel implements Action
 
 	private Object[] getDefectiveTeddyBearList() {
 	    logger.info("getDefectiveTeddyBearList");
-        return CentralController.getInstance().findDefectiveTeddyBears().toArray();
+	    List<TeddyBear> array = CentralController.getInstance().findDefectiveTeddyBears();
+	    if (array == null) {
+            array = new ArrayList<TeddyBear>();
+        }
+        return array.toArray();
     }
 
     private Object[] getReadyTeddyBearsList() {
         logger.info("getReadyTeddyBearList");
-        return CentralController.getInstance().findReadyTeddyBears().toArray();
+        List<TeddyBear> array = CentralController.getInstance().findReadyTeddyBears();
+        if (array == null) {
+            array = new ArrayList<TeddyBear>();
+        }
+        return array.toArray();
     }
 
     private Object[] getTeddyBearList() {
 		logger.info("getTeddyBearList");
-		return CentralController.getInstance().findTeddyBears().toArray();
+		List<TeddyBear> array = CentralController.getInstance().findTeddyBears();
+		if (array == null) {
+            array = new ArrayList<TeddyBear>();
+        }
+        return array.toArray();
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
