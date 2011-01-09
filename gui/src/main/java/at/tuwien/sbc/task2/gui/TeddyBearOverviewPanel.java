@@ -178,6 +178,8 @@ public class TeddyBearOverviewPanel extends javax.swing.JPanel implements Action
 		} else {
 			StringBuffer sb = new StringBuffer();
 			sb.append(tb.toString()+"\n");
+			sb.append("ready= " + tb.isReady() +"\n");
+			sb.append("defective= " +tb.isDefective() +"\n");
 			sb.append(tb.getHat().toString()+"\n");
 			sb.append(tb.getHead().toString()+"\n");
 			sb.append(tb.getBody().toString()+"\n");

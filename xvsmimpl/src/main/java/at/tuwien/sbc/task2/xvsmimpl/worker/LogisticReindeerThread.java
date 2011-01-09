@@ -51,6 +51,7 @@ public class LogisticReindeerThread extends Thread {
                 tx = capi.createTransaction(10000, uri);
 
                 TeddyBear template = new TeddyBear(null, null, null, null, null, null, null, null, null, false);
+                template.setDoneTests(null);
                 ArrayList<TeddyBear> teddies = capi.take(this.logisticsContainer, Arrays.asList(LindaCoordinator
                         .newSelector(template, 1)), 5000, tx);
                 capi.commitTransaction(tx);
