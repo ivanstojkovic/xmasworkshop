@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.mozartspaces.capi3.FifoCoordinator;
 import org.mozartspaces.capi3.KeyCoordinator;
 import org.mozartspaces.capi3.LabelCoordinator;
+import org.mozartspaces.capi3.RandomCoordinator;
 import org.mozartspaces.core.Capi;
 import org.mozartspaces.core.ContainerReference;
 import org.mozartspaces.core.DefaultMzsCore;
@@ -65,7 +66,7 @@ public class XMasWorkshopWarehouse {
             legContainer = capi.createContainer("legContainer", uri, MzsConstants.Container.UNBOUNDED, Arrays.asList(
                 new KeyCoordinator(), new FifoCoordinator()), null, null);
             teddyBearContainer = capi.createContainer("teddyBearContainer", uri, MzsConstants.Container.UNBOUNDED,
-                Arrays.asList(new FifoCoordinator(), new LabelCoordinator()), null, null);
+                Arrays.asList(new FifoCoordinator(), new LabelCoordinator(), new RandomCoordinator(), new KeyCoordinator()), null, null);
             logisticsContainer = capi.createContainer("logisticsContainer", uri, MzsConstants.Container.UNBOUNDED,
                 Arrays.asList(new KeyCoordinator()), null, null);
             
@@ -88,8 +89,8 @@ public class XMasWorkshopWarehouse {
             "2", false), new Hand("h1r", "3", false), new Leg("l11", "3", false), new Leg("l12", "4", false), new Hat(
             "ha1t", "5", "green", false), false, true);
         try {
-            Entry entry1 = new Entry(tb1, LabelCoordinator.newCoordinationData("teddyBear"));
-            Entry entry2 = new Entry(tb2, LabelCoordinator.newCoordinationData("teddyBear"));
+            Entry entry1 = new Entry(tb1, Arrays.asList(KeyCoordinator.newCoordinationData(tb1.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
+            Entry entry2 = new Entry(tb2, Arrays.asList(KeyCoordinator.newCoordinationData(tb2.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
             capi.write(teddyBearContainer, entry1);
             logger.info("Writting test TeddyBear: " + tb1.toString());
             capi.write(teddyBearContainer, entry2);

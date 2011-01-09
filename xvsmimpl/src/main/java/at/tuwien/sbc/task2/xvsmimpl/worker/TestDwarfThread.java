@@ -7,9 +7,9 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.mozartspaces.capi3.FifoCoordinator;
 import org.mozartspaces.capi3.KeyCoordinator;
 import org.mozartspaces.capi3.LabelCoordinator;
+import org.mozartspaces.capi3.RandomCoordinator;
 import org.mozartspaces.core.Capi;
 import org.mozartspaces.core.ContainerReference;
 import org.mozartspaces.core.DefaultMzsCore;
@@ -19,7 +19,6 @@ import org.mozartspaces.core.MzsCoreException;
 import org.mozartspaces.core.TransactionReference;
 
 import at.tuwien.sbc.task2.worker.testing.ComponentTest;
-import at.tuwien.sbc.task2.worker.testing.TeddyBearTest;
 import at.tuwien.sbc.task2.worker.testing.TestDwarf;
 import at.tuwien.sbc.task2.worker.testing.WeightTest;
 import at.tuwien.sbc.task2.xvsmimpl.XMasWorkshopWarehouse;
@@ -31,6 +30,8 @@ public class TestDwarfThread extends Thread {
     
     private TestDwarf testDwarf;
     private boolean running;
+    private boolean taken;
+    private TeddyBear current;
     
     private MzsCore core;
     private Capi capi;
@@ -41,6 +42,7 @@ public class TestDwarfThread extends Thread {
     public TestDwarfThread() {
         testDwarf = new TestDwarf();
         running = true;
+        taken = false;
         initMozartSpaces();
     }
     
@@ -49,13 +51,17 @@ public class TestDwarfThread extends Thread {
             logger.info("RUNNING");
             TransactionReference tx = null;
             try {
-                tx = capi.createTransaction(6000, uri);
+                tx = capi.createTransaction(10000, uri);
                 
                 //DANGER
-                ArrayList<TeddyBear> teddies = capi.take(this.teddyBearContainer, Arrays.asList(LabelCoordinator.newSelector("teddyBear", 1)), 5000, tx);
-                
+                ArrayList<TeddyBear> teddies = capi.take(this.teddyBearContainer, Arrays.asList(RandomCoordinator.newSelector(1)), 5000, tx);
+                capi.commitTransaction(tx);
+                taken = true;
+              
                 if (teddies.size() > 0) {
                     for (TeddyBear t : teddies) {
+                        current = t;
+                        
                         Map<String, Boolean> tests = t.getDoneTests();
                         boolean allTestsDone = true;
                         for (String test : tests.keySet()) {
@@ -70,28 +76,34 @@ public class TestDwarfThread extends Thread {
                                     // negation...
                                 }
                                 
-                                Entry entry = new Entry(t, LabelCoordinator.newCoordinationData("teddyBear"));
-                                capi.write(entry, this.teddyBearContainer);
-                            }
+                            } 
                             
-                            if (tests.get(test) == null) {
+                            if (t.getDoneTests().get(test) == null) {
                                 allTestsDone = false;
+                                logger.info("Test [" + test + "] is not done yet.");
                             } else {
-                                logger.info("hmm");
+                                logger.info("Test [" + test + "] is done.");
                             }
                         }
                         
+                        Entry entry = new Entry(t, Arrays.asList(KeyCoordinator.newCoordinationData(t.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
+                        capi.write(entry, this.teddyBearContainer);
+                        taken = false;
+                        logger.info("written");
+                        
                         if (allTestsDone) {
+                            tx = capi.createTransaction(10000, uri);
                             logger.info("all tests done for teddy [" + t.getId() + "], sending to logistics");
                             capi.delete(this.teddyBearContainer, Arrays.asList(KeyCoordinator.newSelector(t.getId())),
                                 0, tx);
-                            Entry entry = new Entry(t, KeyCoordinator.newCoordinationData(t.getId()));
+                            entry = new Entry(t, KeyCoordinator.newCoordinationData(t.getId()));
                             capi.write(entry, this.logisticsContainer, 0, tx);
+                            capi.commitTransaction(tx);
                         }
                     }
                 }
                 
-                capi.commitTransaction(tx);
+                //capi.commitTransaction(tx);
                 
             } catch (MzsCoreException e) {
                 logger.warn(e.getMessage());
@@ -113,16 +125,42 @@ public class TestDwarfThread extends Thread {
         logger.info("Stopping Thread " + this.getName());
     }
     
+    private void releaseTeddy() {
+        try {
+            Entry entry = new Entry(current, Arrays.asList(KeyCoordinator.newCoordinationData(current.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
+            capi.write(this.teddyBearContainer, 5000, null, entry);
+        } catch (MzsCoreException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static void main(String[] args) {
         if (args.length != 2) {
             System.err.println("Usage: java TestDwarfThread [id] [component|weight]");
             System.exit(1);
         }
         
-        TestDwarfThread thread = new TestDwarfThread();
+        final TestDwarfThread thread = new TestDwarfThread();
         thread.testDwarf.setId(args[0]);
         thread.initTestComponent(args[1]);
         thread.setName("TestDwarf_" + args[0]);
+        
+        //add shutdown hook
+        //eclipse doesn't call this fucker
+        // shall work from the console...
+        Runtime rt = Runtime.getRuntime();
+        logger.info("adding shutdown hook");
+        rt.addShutdownHook(new Thread() {
+          public void run() {
+              logger.info("ShutdownHook called");
+              if (thread.taken) {
+                  logger.info("release teddy bear");
+                  thread.releaseTeddy();
+                  
+              }
+          }
+        });
+        
         thread.start();
     }
     
