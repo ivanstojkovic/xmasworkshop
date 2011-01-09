@@ -2,11 +2,11 @@ package at.tuwien.sbc.task2.xwmodel;
 
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 
-public class Head implements TeddyPart {
+public class Head extends XMasWorkshopObject implements TeddyPart {
 
-    private static final long serialVersionUID = -8786868943940671861L;
+	private static final long serialVersionUID = -8786868943940671861L;
 
-    private String id;
+	private String id;
 
 	private String workerId;
 
@@ -17,6 +17,10 @@ public class Head implements TeddyPart {
 		this.id = id;
 		this.workerId = workerId;
 		this.defective = defective;
+	}
+
+	public Head() {
+		super();
 	}
 
 	public String getId() {

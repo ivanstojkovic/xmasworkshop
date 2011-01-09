@@ -8,6 +8,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 import at.tuwien.sbc.task2.connection.mozartspaces.MozartSpacesControllerReference;
+import at.tuwien.sbc.task2.connection.webservice.WebServiceControllerReference;
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 import at.tuwien.sbc.task2.interfaces.XMasWorkshopEntry;
 import at.tuwien.sbc.task2.worker.production.ProductionElf;
@@ -35,7 +36,7 @@ public class CentralController implements Controller {
 			fis.close();
 			String technology = props.getProperty("technology");
 			if (technology.equals("webservices")) {
-				//	TODO technologyInstance = WebServiceControllerReference.getInstance(); 
+				technologyInstance = WebServiceControllerReference.getInstance(); 
 			}else{
 				technologyInstance = MozartSpacesControllerReference.getInstance(); 
 			}

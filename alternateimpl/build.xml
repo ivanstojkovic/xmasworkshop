@@ -1,0 +1,18 @@
+<project default="wsgen">
+
+	<target name="wsgen">
+
+		<exec executable="wsgen">
+			<arg line="-verbose -cp ./target/classes:./../xwshared/target/classes -keep -s ./src/main/java at.tuwien.sbc.task2.alternateimpl.ws.XMasWorkshopWarehouseService" />
+		</exec>
+
+	</target>
+
+	<target name="wsimport">
+		<exec executable="wsimport">
+			<arg line="-keep -s ./src/main/java -p at.tuwien.sbc.task2.alternateimpl.worker.webservice.client
+	          -d ./bin http://localhost:8080/xmasworkshop?wsdl" />
+		</exec>
+	</target>
+
+</project>

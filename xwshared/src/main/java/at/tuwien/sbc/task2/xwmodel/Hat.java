@@ -2,16 +2,16 @@ package at.tuwien.sbc.task2.xwmodel;
 
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 
-public class Hat implements TeddyPart {
+public class Hat extends XMasWorkshopObject implements TeddyPart {
 
-    private static final long serialVersionUID = -3930567611610841393L;
+	private static final long serialVersionUID = -3930567611610841393L;
 
-    private String id;
+	private String id;
 
 	private String workerId;
 
 	private boolean defective;
-	
+
 	private String color;
 
 	public Hat(String id, String workerId, String color, boolean defective) {
@@ -20,6 +20,10 @@ public class Hat implements TeddyPart {
 		this.workerId = workerId;
 		this.color = color;
 		this.defective = defective;
+	}
+
+	public Hat() {
+		super();
 	}
 
 	public String getId() {
@@ -51,12 +55,20 @@ public class Hat implements TeddyPart {
 		this.workerId = workerId;
 	}
 
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	@Override
 	public TeddyBearPart getTeddyPartType() {
 		if (color.equals(TeddyBearPart.HAT_GREEN.name())) {
-		    return TeddyBearPart.HAT_GREEN;
+			return TeddyBearPart.HAT_GREEN;
 		}
-		
+
 		return TeddyBearPart.HAT_RED;
 	}
 
