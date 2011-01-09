@@ -1,0 +1,14 @@
+<project default="wsimport">
+
+  <target name="wsimport">
+    	
+    <exec executable="wsimport">
+    		
+      <arg line="-keep -s ./src/main/java -p at.tuwien.sbc.task2.connection.webservice.client 
+          -d ./bin http://localhost:8080/xmasworkshop?wsdl"/>
+    		
+    </exec>
+    	
+  </target>
+
+</project>

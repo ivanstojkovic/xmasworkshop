@@ -17,6 +17,10 @@ public class ProductionElf implements Worker, Serializable {
 
 	private int quantity;
 
+	public ProductionElf() {
+		super();
+	}
+
 	public ProductionElf(String id, int errorRate, TeddyBearPart function, int quantity) {
 		super();
 		this.id = id;

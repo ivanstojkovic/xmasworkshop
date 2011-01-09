@@ -8,7 +8,7 @@ import at.tuwien.sbc.task2.worker.testing.ComponentTest;
 import at.tuwien.sbc.task2.worker.testing.TeddyBearTest;
 import at.tuwien.sbc.task2.worker.testing.WeightTest;
 
-public class TeddyBear implements XMasWorkshopEntry {
+public class TeddyBear extends XMasWorkshopObject implements XMasWorkshopEntry {
 
 	private static final long serialVersionUID = 3114700564168942855L;
 
