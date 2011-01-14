@@ -6,10 +6,9 @@ import javax.xml.ws.BindingProvider;
 
 import org.apache.log4j.Logger;
 
-import at.tuwien.sbc.task2.alternateimpl.XMasWorkshopWarehouse;
-import at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.*;
+import at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.XMasWorkshopWarehouseService;
+import at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.XMasWorkshopWarehouseService_Service;
 import at.tuwien.sbc.task2.worker.assembly.AssemblyGnome;
-import at.tuwien.sbc.task2.xwmodel.TeddyBear;
 
 public class AssemblyGnomeThread extends Thread {
     
@@ -19,7 +18,6 @@ public class AssemblyGnomeThread extends Thread {
     private Random randomGen;
     private boolean running;
     
-    private TeddyBear cratedTeddy;
     
     private XMasWorkshopWarehouseService xmasWarehouse;
     
@@ -67,7 +65,6 @@ public class AssemblyGnomeThread extends Thread {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

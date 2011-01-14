@@ -7,11 +7,11 @@ import javax.xml.ws.BindingProvider;
 
 import org.apache.log4j.Logger;
 
+import at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.TeddyBearPart;
+import at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.XMasWorkshopObject;
+import at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.XMasWorkshopWarehouseService;
+import at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.XMasWorkshopWarehouseService_Service;
 import at.tuwien.sbc.task2.connection.Controller;
-import at.tuwien.sbc.task2.connection.webservice.client.TeddyBearPart;
-import at.tuwien.sbc.task2.connection.webservice.client.XMasWorkshopObject;
-import at.tuwien.sbc.task2.connection.webservice.client.XMasWorkshopWarehouseService;
-import at.tuwien.sbc.task2.connection.webservice.client.XMasWorkshopWarehouseService_Service;
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 import at.tuwien.sbc.task2.interfaces.XMasWorkshopEntry;
 import at.tuwien.sbc.task2.worker.production.ProductionElf;
@@ -56,12 +56,12 @@ public class WebServiceControllerReference implements Controller {
 
 	@Override
 	public void write(XMasWorkshopEntry o) {
-		xmasWarehouse.write((at.tuwien.sbc.task2.connection.webservice.client.XMasWorkshopObject)o);
+		xmasWarehouse.write((XMasWorkshopObject)o);
 	}
 
 	@Override
 	public void writePart(ProductionElf elf, int partNr, boolean defect) {
-		at.tuwien.sbc.task2.connection.webservice.client.ProductionElf wsElf = new at.tuwien.sbc.task2.connection.webservice.client.ProductionElf();
+	    at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.ProductionElf wsElf = new at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.ProductionElf();
 		wsElf.setId(elf.getId());
 		wsElf.setErrorRate(elf.getErrorRate());
 		wsElf.setFunction(TeddyBearPart.valueOf(elf.getFunction().name()));
@@ -72,7 +72,7 @@ public class WebServiceControllerReference implements Controller {
 	@Override
 	public List<TeddyBear> findTeddyBears() {
 		List<TeddyBear> toReturn = new ArrayList<TeddyBear>();
-		for(at.tuwien.sbc.task2.connection.webservice.client.TeddyBear tb : xmasWarehouse.findTeddyBears()) {
+		for(at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.TeddyBear tb : xmasWarehouse.findTeddyBears()) {
 			TeddyBear tbNew = new TeddyBear(tb.getId(), 
 					new Head(tb.getHead().getId(), tb.getHead().getProducerId(), tb.getHead().isDefective()), 
 					new Body(tb.getBody().getId(), tb.getBody().getProducerId(), tb.getBody().isDefective()), 
@@ -92,24 +92,24 @@ public class WebServiceControllerReference implements Controller {
 		List<TeddyPart> toReturn = new ArrayList<TeddyPart>();
 		List<XMasWorkshopObject> partsFromWs = xmasWarehouse.findTeddyParts();
 		for(XMasWorkshopObject obj : partsFromWs) {
-			if(obj instanceof at.tuwien.sbc.task2.connection.webservice.client.Head) {
-				at.tuwien.sbc.task2.connection.webservice.client.Head wrapper = (at.tuwien.sbc.task2.connection.webservice.client.Head)obj;
+			if(obj instanceof at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Head) {
+			    at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Head wrapper = (at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Head)obj;
 				toReturn.add(new Head(wrapper.getId(), wrapper.getProducerId(), wrapper.isDefective()));
 			}
-			if(obj instanceof at.tuwien.sbc.task2.connection.webservice.client.Hat) {
-				at.tuwien.sbc.task2.connection.webservice.client.Hat wrapper = (at.tuwien.sbc.task2.connection.webservice.client.Hat)obj;
+			if(obj instanceof at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Hat) {
+			    at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Hat wrapper = (at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Hat)obj;
 				toReturn.add(new Hat(wrapper.getId(), wrapper.getProducerId(), wrapper.getColor(), wrapper.isDefective()));
 			}
-			if(obj instanceof at.tuwien.sbc.task2.connection.webservice.client.Body) {
-				at.tuwien.sbc.task2.connection.webservice.client.Body wrapper = (at.tuwien.sbc.task2.connection.webservice.client.Body)obj;
+			if(obj instanceof at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Body) {
+				at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Body wrapper = (at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Body)obj;
 				toReturn.add(new Body(wrapper.getId(), wrapper.getProducerId(), wrapper.isDefective()));
 			}
-			if(obj instanceof at.tuwien.sbc.task2.connection.webservice.client.Hand) {
-				at.tuwien.sbc.task2.connection.webservice.client.Hand wrapper = (at.tuwien.sbc.task2.connection.webservice.client.Hand)obj;
+			if(obj instanceof at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Hand) {
+				at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Hand wrapper = (at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Hand)obj;
 				toReturn.add(new Hand(wrapper.getId(), wrapper.getProducerId(), wrapper.isDefective()));
 			}
-			if(obj instanceof at.tuwien.sbc.task2.connection.webservice.client.Leg) {
-				at.tuwien.sbc.task2.connection.webservice.client.Leg wrapper = (at.tuwien.sbc.task2.connection.webservice.client.Leg)obj;
+			if(obj instanceof at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Leg) {
+				at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Leg wrapper = (at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.Leg)obj;
 				toReturn.add(new Leg(wrapper.getId(), wrapper.getProducerId(), wrapper.isDefective()));
 			}
 		}
