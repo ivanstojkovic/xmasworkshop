@@ -44,7 +44,6 @@ public class AssemblyGnomeThread extends Thread {
 
 	}
     
-    // TODO pass id as argument....
     public static void main(String[] args) {
         if (args.length != 1) {
             System.err.println("Usage: java AssemblyGnomeThread [id]");

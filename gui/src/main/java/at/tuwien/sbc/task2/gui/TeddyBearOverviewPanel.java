@@ -45,6 +45,7 @@ public class TeddyBearOverviewPanel extends javax.swing.JPanel implements Action
 	private JList jList1;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
+    private JPanel jPanel3;
     private JList jList3;
     private JList jList2;
     private JScrollPane jScrollPane4;
@@ -62,7 +63,7 @@ public class TeddyBearOverviewPanel extends javax.swing.JPanel implements Action
 		try {
 			BorderLayout thisLayout = new BorderLayout();
 			this.setLayout(thisLayout);
-			this.setPreferredSize(new java.awt.Dimension(600, 253));
+			this.setPreferredSize(new java.awt.Dimension(658, 400));
 			this.setSize(600, 400);
 			{
 				jPanel2 = new JPanel();
@@ -80,65 +81,74 @@ public class TeddyBearOverviewPanel extends javax.swing.JPanel implements Action
 			}
 			{
 			    jPanel1 = new JPanel();
-                this.add(jPanel1, BorderLayout.NORTH);
-			    jPanel1.setLayout(null);
+			    BorderLayout jPanel1Layout = new BorderLayout();
+                this.add(jPanel1, BorderLayout.CENTER);
+			    jPanel1.setLayout(jPanel1Layout);
 			    jPanel1.setPreferredSize(new java.awt.Dimension(600, 337));
 			    jPanel1.setSize(new java.awt.Dimension(600, 54));
 			    {
-			        jScrollPane1 = new JScrollPane();
-			        jPanel1.add(jScrollPane1);
-			        jScrollPane1.setBounds(8, 4, 207, 109);
-                    jScrollPane1.setBorder(BorderFactory.createTitledBorder("Teddy Bear Container"));
-			        {
-			            ListModel jList1Model = new DefaultComboBoxModel(getTeddyBearList());
-			            jList1 = new JList();
-			            jScrollPane1.setViewportView(jList1);
-			            jList1.setModel(jList1Model);
-			            jList1.setBounds(12, 12, 162, 325);
-			            jList1.setName("teddyBearList");
-                        jList1.setPreferredSize(new java.awt.Dimension(162, 325));
-			            jList1.addListSelectionListener(this);
-			        }
-			    }
-			    {
 			        jScrollPane2 = new JScrollPane();
-			        jPanel1.add(jScrollPane2);
+			        jPanel1.add(jScrollPane2, BorderLayout.CENTER);
 			        jScrollPane2.setBounds(227, 12, 367, 313);
 			        {
 			            teddyBearInfoTextArea = new JTextArea();
                         jScrollPane2.setViewportView(teddyBearInfoTextArea);
 			            teddyBearInfoTextArea.setBounds(148, 7, 447, 328);
-                        teddyBearInfoTextArea.setPreferredSize(new java.awt.Dimension(434, 321));
+                        teddyBearInfoTextArea.setPreferredSize(new java.awt.Dimension(437, 329));
 			        }
 			    }
 			    {
-			        jScrollPane3 = new JScrollPane();
-			        jPanel1.add(jScrollPane3);
-                    jScrollPane3.setBounds(12, 125, 197, 93);
-                    jScrollPane3.setBorder(BorderFactory.createTitledBorder("Logistics Container"));
-                    {
-                        ListModel jList2Model = 
-                            new DefaultComboBoxModel(this.getReadyTeddyBearsList());
-                        jList2 = new JList();
-                        jScrollPane3.setViewportView(jList2);
-                        jList2.setModel(jList2Model);
-                        jList2.setPreferredSize(new java.awt.Dimension(187, 115));
-                        jList2.addListSelectionListener(this);
-                    }
-			    }
-			    {
-			        jScrollPane4 = new JScrollPane();
-			        jPanel1.add(jScrollPane4);
-                    jScrollPane4.setBounds(12, 236, 197, 89);
-                    jScrollPane4.setBorder(BorderFactory.createTitledBorder("Defective Container"));
-                    {
-                        ListModel jList3Model = 
-                            new DefaultComboBoxModel(this.getDefectiveTeddyBearList());
-                        jList3 = new JList();
-                        jScrollPane4.setViewportView(jList3);
-                        jList3.setModel(jList3Model);
-                        jList3.addListSelectionListener(this);
-                    }
+			        jPanel3 = new JPanel();
+			        jPanel1.add(jPanel3, BorderLayout.WEST);
+                    jPanel3.setPreferredSize(new java.awt.Dimension(194, 332));
+			        {
+			            jScrollPane1 = new JScrollPane();
+                        jPanel3.add(jScrollPane1);
+			            jScrollPane1.setBounds(8, 4, 207, 109);
+			            jScrollPane1.setBorder(BorderFactory.createTitledBorder("Teddy Bear Container"));
+                        jScrollPane1.setPreferredSize(new java.awt.Dimension(192, 112));
+			            {
+			                ListModel jList1Model = new DefaultComboBoxModel(getTeddyBearList());
+			                jList1 = new JList();
+			                jScrollPane1.setViewportView(jList1);
+			                jList1.setModel(jList1Model);
+			                jList1.setBounds(12, 12, 162, 325);
+			                jList1.setName("teddyBearList");
+			                jList1.setPreferredSize(new java.awt.Dimension(162, 325));
+			                jList1.addListSelectionListener(this);
+			            }
+			        }
+			        {
+			            jScrollPane3 = new JScrollPane();
+                        jPanel3.add(jScrollPane3);
+			            jScrollPane3.setBounds(12, 125, 197, 93);
+			            jScrollPane3.setBorder(BorderFactory.createTitledBorder("Logistics Container"));
+                        jScrollPane3.setPreferredSize(new java.awt.Dimension(187, 110));
+			            {
+			                ListModel jList2Model = 
+			                    new DefaultComboBoxModel(this.getReadyTeddyBearsList());
+			                jList2 = new JList();
+			                jScrollPane3.setViewportView(jList2);
+			                jList2.setModel(jList2Model);
+			                jList2.setPreferredSize(new java.awt.Dimension(187, 115));
+			                jList2.addListSelectionListener(this);
+			            }
+			        }
+			        {
+			            jScrollPane4 = new JScrollPane();
+                        jPanel3.add(jScrollPane4);
+			            jScrollPane4.setBounds(12, 236, 197, 89);
+			            jScrollPane4.setBorder(BorderFactory.createTitledBorder("Defective Container"));
+                        jScrollPane4.setPreferredSize(new java.awt.Dimension(192, 94));
+			            {
+			                ListModel jList3Model = 
+			                    new DefaultComboBoxModel(this.getDefectiveTeddyBearList());
+			                jList3 = new JList();
+			                jScrollPane4.setViewportView(jList3);
+			                jList3.setModel(jList3Model);
+			                jList3.addListSelectionListener(this);
+			            }
+			        }
 			    }
 			}
 		} catch (Exception e) {

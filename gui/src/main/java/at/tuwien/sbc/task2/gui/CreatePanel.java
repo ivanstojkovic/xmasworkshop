@@ -155,6 +155,9 @@ public class CreatePanel extends javax.swing.JPanel implements ActionListener, C
                     }
                     new ProductionElfThread(new ProductionElf(elfNameTextField.getText(), errRate,
                             (TeddyBearPart) partComboBox.getSelectedItem(), count)).start();
+                    this.errorRateTextField.setText("");
+                    this.countTextField.setText("");
+                    this.elfNameTextField.setText("");
                 } else {
                     countTextField.setBackground(Color.RED);
                 }

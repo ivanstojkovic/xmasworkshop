@@ -77,7 +77,7 @@ public class PartsOverviewPanel extends javax.swing.JPanel implements ActionList
 					refreshButton = new JButton();
 					jPanel2.add(refreshButton);
 					refreshButton.setText("Refresh");
-					refreshButton.setBounds(22, 6, 58, 22);
+					refreshButton.setBounds(22, 6, 93, 22);
 					refreshButton.addActionListener(this);
 					refreshButton.setActionCommand("refreshButton");
 				}
