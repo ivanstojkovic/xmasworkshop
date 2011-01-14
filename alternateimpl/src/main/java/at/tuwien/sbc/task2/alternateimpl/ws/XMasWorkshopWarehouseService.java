@@ -47,6 +47,14 @@ public class XMasWorkshopWarehouseService {
 		return XMasWorkshopWarehouse.getInstance().findTeddyBears();
 	}
 
+	public List<TeddyBear> findDefectiveTeddyBears() {
+	    return XMasWorkshopWarehouse.getInstance().findDefectiveTeddyBears();
+	}
+	
+	public List<TeddyBear> findReadyTeddyBears() {
+	    return XMasWorkshopWarehouse.getInstance().findReadyTeddyBears();
+	}
+
 	@WebMethod
 	public List<XMasWorkshopObject> findTeddyParts() {
 		return XMasWorkshopWarehouse.getInstance().findTeddyParts();
@@ -54,5 +62,9 @@ public class XMasWorkshopWarehouseService {
 	
 	public void tryToAssembleTeddyBear(String teddyId) {
 		XMasWorkshopWarehouse.getInstance().tryToAssembleTeddyBear(teddyId);
+	}
+	
+	public void tryToTestTeddyBear(String test) {
+	    XMasWorkshopWarehouse.getInstance().tryToTestTeddyBear(test);
 	}
 }

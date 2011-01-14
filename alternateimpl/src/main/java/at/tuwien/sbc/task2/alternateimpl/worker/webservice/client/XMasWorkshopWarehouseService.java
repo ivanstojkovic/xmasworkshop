@@ -77,6 +77,28 @@ public interface XMasWorkshopWarehouseService {
     /**
      * 
      * @return
+     *     returns java.util.List<at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.TeddyBear>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findDefectiveTeddyBears", targetNamespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", className = "at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.FindDefectiveTeddyBears")
+    @ResponseWrapper(localName = "findDefectiveTeddyBearsResponse", targetNamespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", className = "at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.FindDefectiveTeddyBearsResponse")
+    public List<TeddyBear> findDefectiveTeddyBears();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.TeddyBear>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findReadyTeddyBears", targetNamespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", className = "at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.FindReadyTeddyBears")
+    @ResponseWrapper(localName = "findReadyTeddyBearsResponse", targetNamespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", className = "at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.FindReadyTeddyBearsResponse")
+    public List<TeddyBear> findReadyTeddyBears();
+
+    /**
+     * 
+     * @return
      *     returns java.util.List<at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.XMasWorkshopObject>
      */
     @WebMethod
@@ -93,6 +115,17 @@ public interface XMasWorkshopWarehouseService {
     @RequestWrapper(localName = "tryToAssembleTeddyBear", targetNamespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", className = "at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.TryToAssembleTeddyBear")
     @ResponseWrapper(localName = "tryToAssembleTeddyBearResponse", targetNamespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", className = "at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.TryToAssembleTeddyBearResponse")
     public void tryToAssembleTeddyBear(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "tryToTestTeddyBear", targetNamespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", className = "at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.TryToTestTeddyBear")
+    @ResponseWrapper(localName = "tryToTestTeddyBearResponse", targetNamespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", className = "at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.TryToTestTeddyBearResponse")
+    public void tryToTestTeddyBear(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
 

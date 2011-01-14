@@ -3,10 +3,14 @@ package at.tuwien.sbc.task2.alternateimpl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import at.tuwien.sbc.task2.worker.production.ProductionElf;
+import at.tuwien.sbc.task2.worker.testing.ComponentTest;
+import at.tuwien.sbc.task2.worker.testing.TeddyBearTest;
+import at.tuwien.sbc.task2.worker.testing.WeightTest;
 import at.tuwien.sbc.task2.xwmodel.Body;
 import at.tuwien.sbc.task2.xwmodel.Hand;
 import at.tuwien.sbc.task2.xwmodel.Hat;
@@ -27,6 +31,9 @@ public class XMasWorkshopWarehouse {
 	private List<Hand> armContainer;
 	private List<Leg> legContainer;
 	private List<TeddyBear> teddyBearContainer;
+	private List<TeddyBear> defectiveTeddyBearContainer;
+	private List<TeddyBear> readyTeddyBearContainer;
+	
 
 	private XMasWorkshopWarehouse() {
 		hatContainer = Collections.synchronizedList(new ArrayList<Hat>());
@@ -35,6 +42,8 @@ public class XMasWorkshopWarehouse {
 		armContainer = Collections.synchronizedList(new ArrayList<Hand>());
 		legContainer = Collections.synchronizedList(new ArrayList<Leg>());
 		teddyBearContainer = Collections.synchronizedList(new ArrayList<TeddyBear>());
+		defectiveTeddyBearContainer = Collections.synchronizedList(new ArrayList<TeddyBear>());
+		readyTeddyBearContainer = Collections.synchronizedList(new ArrayList<TeddyBear>());
 		generateTestData();
 	}
 
@@ -135,6 +144,14 @@ public class XMasWorkshopWarehouse {
 		toReturn.addAll(bodyContainer);
 		return toReturn;
 	}
+	
+	public synchronized List<TeddyBear> findDefectiveTeddyBears() {
+	    return defectiveTeddyBearContainer;
+	}
+	
+	public synchronized List<TeddyBear> findReadyTeddyBears() {
+	    return readyTeddyBearContainer;
+	}
 
 	public synchronized void tryToAssembleTeddyBear(String teddyId) {
 		logger.info("tryToAssembleTeddyBear " + teddyId);
@@ -146,5 +163,60 @@ public class XMasWorkshopWarehouse {
 			}
 		}
 	}
+	
+	public synchronized void tryToTestTeddyBear(String test) {
+	    logger.info("tryToTestTeddyBear with test " + test);
+	    int size = this.teddyBearContainer.size();
+	    TeddyBearTest tbTest = null;
+	    
+	    
+	    if (test.equals("component")) {
+	        tbTest = new ComponentTest();
+	        
+	    } else if (test.equals("weight")) {
+	        tbTest = new WeightTest();
+	        
+	    } else {
+	        logger.warn("specified test '" + test + "' does not exist, returning...");
+	        return;
+	    }
+	    
+	    
+	    logger.info("size: " + size);
+	    while (size > 0) {
+	        logger.info("size: " + size);
+	        TeddyBear teddyBear = this.teddyBearContainer.get(size - 1);
+	        logger.info(teddyBear.getDoneTests().toString());
+	        Boolean examined = teddyBear.getDoneTests().get(test);
+	        if (examined == null) {
+	            logger.info("Testing teddy [" + teddyBear.getId() + "] with test: " + test);
+	            examined = tbTest.examine(teddyBear);
+	            teddyBear.getDoneTests().put(test, examined);
+	            
+	            if (this.isTested(teddyBear)) {
+	                logger.info("All tests done for teddy [" + teddyBear.getId() + "], sending to logistics");
+	                teddyBearContainer.remove(teddyBear);
+	                readyTeddyBearContainer.add(teddyBear);
+	            }
+	            
+	            break; //tested one
+	        }
+	        
+	        size--;
+	    }
+	}
+
+    private boolean isTested(TeddyBear teddyBear) {
+        Map<String, Boolean> tests = teddyBear.getDoneTests();
+        boolean allDone = true;
+        for (String k : tests.keySet()) {
+            if (tests.get(k) == null) {
+                logger.info("Test '" + k + "' is not done yet, leaving in container");
+                allDone = false;
+            }
+        }
+        
+        return allDone;
+    }
 
 }

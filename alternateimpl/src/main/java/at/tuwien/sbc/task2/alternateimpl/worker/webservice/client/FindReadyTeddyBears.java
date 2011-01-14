@@ -3,17 +3,16 @@ package at.tuwien.sbc.task2.alternateimpl.worker.webservice.client;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for xMasWorkshopObject complex type.
+ * <p>Java class for findReadyTeddyBears complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="xMasWorkshopObject">
+ * &lt;complexType name="findReadyTeddyBears">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -26,16 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xMasWorkshopObject")
-@XmlSeeAlso({
-    Body.class,
-    Hat.class,
-    Hand.class,
-    TeddyBear.class,
-    Head.class,
-    Leg.class
-})
-public abstract class XMasWorkshopObject {
+@XmlType(name = "findReadyTeddyBears")
+public class FindReadyTeddyBears {
 
 
 }
