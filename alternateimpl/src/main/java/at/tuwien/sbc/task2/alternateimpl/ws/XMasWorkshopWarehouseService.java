@@ -67,4 +67,8 @@ public class XMasWorkshopWarehouseService {
 	public void tryToTestTeddyBear(String test) {
 	    XMasWorkshopWarehouse.getInstance().tryToTestTeddyBear(test);
 	}
+	
+	public void transportTeddyBear() {
+	    XMasWorkshopWarehouse.getInstance().transportTeddyBear();
+	}
 }

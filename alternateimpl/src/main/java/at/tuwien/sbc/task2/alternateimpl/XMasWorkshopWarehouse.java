@@ -33,6 +33,8 @@ public class XMasWorkshopWarehouse {
 	private List<TeddyBear> teddyBearContainer;
 	private List<TeddyBear> defectiveTeddyBearContainer;
 	private List<TeddyBear> readyTeddyBearContainer;
+	private List<TeddyBear> logisticsTeddyBearContainer;
+	
 	
 
 	private XMasWorkshopWarehouse() {
@@ -44,6 +46,7 @@ public class XMasWorkshopWarehouse {
 		teddyBearContainer = Collections.synchronizedList(new ArrayList<TeddyBear>());
 		defectiveTeddyBearContainer = Collections.synchronizedList(new ArrayList<TeddyBear>());
 		readyTeddyBearContainer = Collections.synchronizedList(new ArrayList<TeddyBear>());
+		logisticsTeddyBearContainer = Collections.synchronizedList(new ArrayList<TeddyBear>());
 		generateTestData();
 	}
 
@@ -182,9 +185,7 @@ public class XMasWorkshopWarehouse {
 	    }
 	    
 	    
-	    logger.info("size: " + size);
 	    while (size > 0) {
-	        logger.info("size: " + size);
 	        TeddyBear teddyBear = this.teddyBearContainer.get(size - 1);
 	        logger.info(teddyBear.getDoneTests().toString());
 	        Boolean examined = teddyBear.getDoneTests().get(test);
@@ -196,7 +197,7 @@ public class XMasWorkshopWarehouse {
 	            if (this.isTested(teddyBear)) {
 	                logger.info("All tests done for teddy [" + teddyBear.getId() + "], sending to logistics");
 	                teddyBearContainer.remove(teddyBear);
-	                readyTeddyBearContainer.add(teddyBear);
+	                logisticsTeddyBearContainer.add(teddyBear);
 	            }
 	            
 	            break; //tested one
@@ -205,15 +206,41 @@ public class XMasWorkshopWarehouse {
 	        size--;
 	    }
 	}
+	
+	public void transportTeddyBear() {
+	    logger.info("transportTeddyBear");
+	    
+	    if (this.logisticsTeddyBearContainer.size() > 0) {
+	        TeddyBear teddyBear = this.logisticsTeddyBearContainer.remove(0);
+	        teddyBear.setReady(true);
+	        
+	        if (teddyBear.isDefective()) {
+	            logger.info("Teddy Bear [" + teddyBear.getId() + "] is defective, not transporting");
+	            defectiveTeddyBearContainer.add(teddyBear);
+	        } else {
+	            logger.info("Teddy Bear [" + teddyBear.getId() + "] is ok, sending");
+	            readyTeddyBearContainer.add(teddyBear);
+	        }
+	    }
+	}
 
     private boolean isTested(TeddyBear teddyBear) {
         Map<String, Boolean> tests = teddyBear.getDoneTests();
         boolean allDone = true;
+        boolean defective = false;
         for (String k : tests.keySet()) {
             if (tests.get(k) == null) {
                 logger.info("Test '" + k + "' is not done yet, leaving in container");
                 allDone = false;
+            } else {
+                if (!tests.get(k)) {
+                    defective = true;
+                }
             }
+        }
+        
+        if (allDone) {
+            teddyBear.setDefective(defective);
         }
         
         return allDone;

@@ -30,10 +30,12 @@ public class ObjectFactory {
     private final static QName _SayHelloResponse_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "sayHelloResponse");
     private final static QName _TryToAssembleTeddyBearResponse_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "tryToAssembleTeddyBearResponse");
     private final static QName _FindDefectiveTeddyBearsResponse_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "findDefectiveTeddyBearsResponse");
-    private final static QName _WritePartResponse_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "writePartResponse");
+    private final static QName _TransportTeddyBear_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "transportTeddyBear");
     private final static QName _FindDefectiveTeddyBears_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "findDefectiveTeddyBears");
+    private final static QName _WritePartResponse_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "writePartResponse");
     private final static QName _FindTeddyPartsResponse_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "findTeddyPartsResponse");
     private final static QName _FindTeddyParts_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "findTeddyParts");
+    private final static QName _TransportTeddyBearResponse_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "transportTeddyBearResponse");
     private final static QName _FindReadyTeddyBears_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "findReadyTeddyBears");
     private final static QName _FindTeddyBearsResponse_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "findTeddyBearsResponse");
     private final static QName _TryToTestTeddyBearResponse_QNAME = new QName("http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", "tryToTestTeddyBearResponse");
@@ -51,11 +53,123 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SayHello }
+     * 
+     */
+    public SayHello createSayHello() {
+        return new SayHello();
+    }
+
+    /**
+     * Create an instance of {@link FindDefectiveTeddyBearsResponse }
+     * 
+     */
+    public FindDefectiveTeddyBearsResponse createFindDefectiveTeddyBearsResponse() {
+        return new FindDefectiveTeddyBearsResponse();
+    }
+
+    /**
+     * Create an instance of {@link Hat }
+     * 
+     */
+    public Hat createHat() {
+        return new Hat();
+    }
+
+    /**
+     * Create an instance of {@link FindTeddyParts }
+     * 
+     */
+    public FindTeddyParts createFindTeddyParts() {
+        return new FindTeddyParts();
+    }
+
+    /**
+     * Create an instance of {@link TryToAssembleTeddyBear }
+     * 
+     */
+    public TryToAssembleTeddyBear createTryToAssembleTeddyBear() {
+        return new TryToAssembleTeddyBear();
+    }
+
+    /**
+     * Create an instance of {@link TeddyBear.DoneTests.Entry }
+     * 
+     */
+    public TeddyBear.DoneTests.Entry createTeddyBearDoneTestsEntry() {
+        return new TeddyBear.DoneTests.Entry();
+    }
+
+    /**
+     * Create an instance of {@link TeddyBear.DoneTests }
+     * 
+     */
+    public TeddyBear.DoneTests createTeddyBearDoneTests() {
+        return new TeddyBear.DoneTests();
+    }
+
+    /**
+     * Create an instance of {@link Leg }
+     * 
+     */
+    public Leg createLeg() {
+        return new Leg();
+    }
+
+    /**
+     * Create an instance of {@link TeddyBear }
+     * 
+     */
+    public TeddyBear createTeddyBear() {
+        return new TeddyBear();
+    }
+
+    /**
+     * Create an instance of {@link WritePart }
+     * 
+     */
+    public WritePart createWritePart() {
+        return new WritePart();
+    }
+
+    /**
      * Create an instance of {@link Head }
      * 
      */
     public Head createHead() {
         return new Head();
+    }
+
+    /**
+     * Create an instance of {@link SayHelloResponse }
+     * 
+     */
+    public SayHelloResponse createSayHelloResponse() {
+        return new SayHelloResponse();
+    }
+
+    /**
+     * Create an instance of {@link TryToAssembleTeddyBearResponse }
+     * 
+     */
+    public TryToAssembleTeddyBearResponse createTryToAssembleTeddyBearResponse() {
+        return new TryToAssembleTeddyBearResponse();
+    }
+
+    /**
+     * Create an instance of {@link WriteResponse }
+     * 
+     */
+    public WriteResponse createWriteResponse() {
+        return new WriteResponse();
+    }
+
+    /**
+     * Create an instance of {@link TransportTeddyBear }
+     * 
+     */
+    public TransportTeddyBear createTransportTeddyBear() {
+        return new TransportTeddyBear();
     }
 
     /**
@@ -75,6 +189,78 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link WritePartResponse }
+     * 
+     */
+    public WritePartResponse createWritePartResponse() {
+        return new WritePartResponse();
+    }
+
+    /**
+     * Create an instance of {@link Hand }
+     * 
+     */
+    public Hand createHand() {
+        return new Hand();
+    }
+
+    /**
+     * Create an instance of {@link FindDefectiveTeddyBears }
+     * 
+     */
+    public FindDefectiveTeddyBears createFindDefectiveTeddyBears() {
+        return new FindDefectiveTeddyBears();
+    }
+
+    /**
+     * Create an instance of {@link FindTeddyBears }
+     * 
+     */
+    public FindTeddyBears createFindTeddyBears() {
+        return new FindTeddyBears();
+    }
+
+    /**
+     * Create an instance of {@link Write }
+     * 
+     */
+    public Write createWrite() {
+        return new Write();
+    }
+
+    /**
+     * Create an instance of {@link Body }
+     * 
+     */
+    public Body createBody() {
+        return new Body();
+    }
+
+    /**
+     * Create an instance of {@link FindTeddyBearsResponse }
+     * 
+     */
+    public FindTeddyBearsResponse createFindTeddyBearsResponse() {
+        return new FindTeddyBearsResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindTeddyPartsResponse }
+     * 
+     */
+    public FindTeddyPartsResponse createFindTeddyPartsResponse() {
+        return new FindTeddyPartsResponse();
+    }
+
+    /**
+     * Create an instance of {@link TransportTeddyBearResponse }
+     * 
+     */
+    public TransportTeddyBearResponse createTransportTeddyBearResponse() {
+        return new TransportTeddyBearResponse();
+    }
+
+    /**
      * Create an instance of {@link FindReadyTeddyBearsResponse }
      * 
      */
@@ -91,179 +277,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Write }
-     * 
-     */
-    public Write createWrite() {
-        return new Write();
-    }
-
-    /**
-     * Create an instance of {@link WritePart }
-     * 
-     */
-    public WritePart createWritePart() {
-        return new WritePart();
-    }
-
-    /**
-     * Create an instance of {@link WritePartResponse }
-     * 
-     */
-    public WritePartResponse createWritePartResponse() {
-        return new WritePartResponse();
-    }
-
-    /**
-     * Create an instance of {@link FindTeddyBears }
-     * 
-     */
-    public FindTeddyBears createFindTeddyBears() {
-        return new FindTeddyBears();
-    }
-
-    /**
-     * Create an instance of {@link SayHello }
-     * 
-     */
-    public SayHello createSayHello() {
-        return new SayHello();
-    }
-
-    /**
-     * Create an instance of {@link TeddyBear.DoneTests.Entry }
-     * 
-     */
-    public TeddyBear.DoneTests.Entry createTeddyBearDoneTestsEntry() {
-        return new TeddyBear.DoneTests.Entry();
-    }
-
-    /**
-     * Create an instance of {@link WriteResponse }
-     * 
-     */
-    public WriteResponse createWriteResponse() {
-        return new WriteResponse();
-    }
-
-    /**
-     * Create an instance of {@link FindTeddyBearsResponse }
-     * 
-     */
-    public FindTeddyBearsResponse createFindTeddyBearsResponse() {
-        return new FindTeddyBearsResponse();
-    }
-
-    /**
-     * Create an instance of {@link Body }
-     * 
-     */
-    public Body createBody() {
-        return new Body();
-    }
-
-    /**
-     * Create an instance of {@link FindDefectiveTeddyBearsResponse }
-     * 
-     */
-    public FindDefectiveTeddyBearsResponse createFindDefectiveTeddyBearsResponse() {
-        return new FindDefectiveTeddyBearsResponse();
-    }
-
-    /**
-     * Create an instance of {@link Leg }
-     * 
-     */
-    public Leg createLeg() {
-        return new Leg();
-    }
-
-    /**
      * Create an instance of {@link TryToTestTeddyBear }
      * 
      */
     public TryToTestTeddyBear createTryToTestTeddyBear() {
         return new TryToTestTeddyBear();
-    }
-
-    /**
-     * Create an instance of {@link FindTeddyParts }
-     * 
-     */
-    public FindTeddyParts createFindTeddyParts() {
-        return new FindTeddyParts();
-    }
-
-    /**
-     * Create an instance of {@link TeddyBear.DoneTests }
-     * 
-     */
-    public TeddyBear.DoneTests createTeddyBearDoneTests() {
-        return new TeddyBear.DoneTests();
-    }
-
-    /**
-     * Create an instance of {@link TeddyBear }
-     * 
-     */
-    public TeddyBear createTeddyBear() {
-        return new TeddyBear();
-    }
-
-    /**
-     * Create an instance of {@link SayHelloResponse }
-     * 
-     */
-    public SayHelloResponse createSayHelloResponse() {
-        return new SayHelloResponse();
-    }
-
-    /**
-     * Create an instance of {@link FindDefectiveTeddyBears }
-     * 
-     */
-    public FindDefectiveTeddyBears createFindDefectiveTeddyBears() {
-        return new FindDefectiveTeddyBears();
-    }
-
-    /**
-     * Create an instance of {@link Hat }
-     * 
-     */
-    public Hat createHat() {
-        return new Hat();
-    }
-
-    /**
-     * Create an instance of {@link Hand }
-     * 
-     */
-    public Hand createHand() {
-        return new Hand();
-    }
-
-    /**
-     * Create an instance of {@link FindTeddyPartsResponse }
-     * 
-     */
-    public FindTeddyPartsResponse createFindTeddyPartsResponse() {
-        return new FindTeddyPartsResponse();
-    }
-
-    /**
-     * Create an instance of {@link TryToAssembleTeddyBear }
-     * 
-     */
-    public TryToAssembleTeddyBear createTryToAssembleTeddyBear() {
-        return new TryToAssembleTeddyBear();
-    }
-
-    /**
-     * Create an instance of {@link TryToAssembleTeddyBearResponse }
-     * 
-     */
-    public TryToAssembleTeddyBearResponse createTryToAssembleTeddyBearResponse() {
-        return new TryToAssembleTeddyBearResponse();
     }
 
     /**
@@ -321,12 +339,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link WritePartResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link TransportTeddyBear }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", name = "writePartResponse")
-    public JAXBElement<WritePartResponse> createWritePartResponse(WritePartResponse value) {
-        return new JAXBElement<WritePartResponse>(_WritePartResponse_QNAME, WritePartResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", name = "transportTeddyBear")
+    public JAXBElement<TransportTeddyBear> createTransportTeddyBear(TransportTeddyBear value) {
+        return new JAXBElement<TransportTeddyBear>(_TransportTeddyBear_QNAME, TransportTeddyBear.class, null, value);
     }
 
     /**
@@ -336,6 +354,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", name = "findDefectiveTeddyBears")
     public JAXBElement<FindDefectiveTeddyBears> createFindDefectiveTeddyBears(FindDefectiveTeddyBears value) {
         return new JAXBElement<FindDefectiveTeddyBears>(_FindDefectiveTeddyBears_QNAME, FindDefectiveTeddyBears.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link WritePartResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", name = "writePartResponse")
+    public JAXBElement<WritePartResponse> createWritePartResponse(WritePartResponse value) {
+        return new JAXBElement<WritePartResponse>(_WritePartResponse_QNAME, WritePartResponse.class, null, value);
     }
 
     /**
@@ -354,6 +381,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", name = "findTeddyParts")
     public JAXBElement<FindTeddyParts> createFindTeddyParts(FindTeddyParts value) {
         return new JAXBElement<FindTeddyParts>(_FindTeddyParts_QNAME, FindTeddyParts.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link TransportTeddyBearResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", name = "transportTeddyBearResponse")
+    public JAXBElement<TransportTeddyBearResponse> createTransportTeddyBearResponse(TransportTeddyBearResponse value) {
+        return new JAXBElement<TransportTeddyBearResponse>(_TransportTeddyBearResponse_QNAME, TransportTeddyBearResponse.class, null, value);
     }
 
     /**

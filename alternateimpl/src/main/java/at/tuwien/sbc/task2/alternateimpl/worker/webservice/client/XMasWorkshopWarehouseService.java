@@ -129,4 +129,12 @@ public interface XMasWorkshopWarehouseService {
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
 
+    /**
+     * 
+     */
+    @WebMethod
+    @RequestWrapper(localName = "transportTeddyBear", targetNamespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", className = "at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.TransportTeddyBear")
+    @ResponseWrapper(localName = "transportTeddyBearResponse", targetNamespace = "http://tuwien.ac.at/sbc/task2/XMasWorkshopWarehouseService", className = "at.tuwien.sbc.task2.alternateimpl.worker.webservice.client.TransportTeddyBearResponse")
+    public void transportTeddyBear();
+
 }
