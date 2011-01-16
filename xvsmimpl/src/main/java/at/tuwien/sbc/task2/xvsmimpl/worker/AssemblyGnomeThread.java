@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -14,11 +15,9 @@ import org.mozartspaces.core.Capi;
 import org.mozartspaces.core.ContainerReference;
 import org.mozartspaces.core.DefaultMzsCore;
 import org.mozartspaces.core.Entry;
-import org.mozartspaces.core.MzsConstants;
 import org.mozartspaces.core.MzsCore;
 import org.mozartspaces.core.MzsCoreException;
 import org.mozartspaces.core.TransactionReference;
-import org.mozartspaces.core.requests.TransactionalRequest;
 
 import at.tuwien.sbc.task2.interfaces.TeddyPart;
 import at.tuwien.sbc.task2.worker.assembly.AssemblyGnome;
@@ -156,7 +155,6 @@ public class AssemblyGnomeThread extends Thread {
                 
             } catch (MzsCoreException e) {
                 logger.warn(e.getMessage());
-                e.printStackTrace();
                 try {
                     capi.rollbackTransaction(tx);
                 } catch (MzsCoreException e1) {
@@ -167,8 +165,7 @@ public class AssemblyGnomeThread extends Thread {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         
@@ -178,6 +175,7 @@ public class AssemblyGnomeThread extends Thread {
     private TeddyBear assembleTeddy(ArrayList<TeddyPart> foundTeddyParts) {
         final TeddyBear teddy = new TeddyBear();
         teddy.setDefective(false); // not defective, testing will determine...
+        teddy.setReady(false);
         
         for (TeddyPart part : foundTeddyParts) {
             TeddyBearPart type = part.getTeddyPartType();
@@ -215,6 +213,9 @@ public class AssemblyGnomeThread extends Thread {
         }
         
         teddy.setId("teddy_" + assemblyGnome.getId() + "_r_" + randomGen.nextInt(10000));
+        teddy.setDoneTests(new HashMap<String, Boolean>());
+        teddy.getDoneTests().put("component", null);
+        teddy.getDoneTests().put("weight", null);
         return teddy;
     }
     
