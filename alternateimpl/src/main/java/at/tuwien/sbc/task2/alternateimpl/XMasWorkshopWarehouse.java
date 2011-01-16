@@ -157,7 +157,6 @@ public class XMasWorkshopWarehouse {
 	}
 
 	public synchronized void tryToAssembleTeddyBear(String teddyId) {
-		logger.info("tryToAssembleTeddyBear " + teddyId);
 		synchronized (this) {
 			if (!hatContainer.isEmpty() && !headContainer.isEmpty() && !bodyContainer.isEmpty() && legContainer.size() > 1 && armContainer.size() > 1) {
 				TeddyBear newTeddy = new TeddyBear(teddyId, headContainer.remove(0), bodyContainer.remove(0), armContainer.remove(1), armContainer.remove(0), legContainer.remove(1), legContainer.remove(0), hatContainer.remove(0), false, false);
@@ -168,7 +167,6 @@ public class XMasWorkshopWarehouse {
 	}
 	
 	public synchronized void tryToTestTeddyBear(String test) {
-	    logger.info("tryToTestTeddyBear with test " + test);
 	    int size = this.teddyBearContainer.size();
 	    TeddyBearTest tbTest = null;
 	    
@@ -208,8 +206,6 @@ public class XMasWorkshopWarehouse {
 	}
 	
 	public void transportTeddyBear() {
-	    logger.info("transportTeddyBear");
-	    
 	    if (this.logisticsTeddyBearContainer.size() > 0) {
 	        TeddyBear teddyBear = this.logisticsTeddyBearContainer.remove(0);
 	        teddyBear.setReady(true);

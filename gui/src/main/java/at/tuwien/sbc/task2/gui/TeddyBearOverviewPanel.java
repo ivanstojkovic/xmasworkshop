@@ -157,29 +157,29 @@ public class TeddyBearOverviewPanel extends javax.swing.JPanel implements Action
 	}
 
 	private Object[] getDefectiveTeddyBearList() {
-	    logger.info("getDefectiveTeddyBearList");
 	    List<TeddyBear> array = CentralController.getInstance().findDefectiveTeddyBears();
 	    if (array == null) {
             array = new ArrayList<TeddyBear>();
         }
+	    logger.info("getDefectiveTeddyBearList: " + array.size());
         return array.toArray();
     }
 
     private Object[] getReadyTeddyBearsList() {
-        logger.info("getReadyTeddyBearList");
         List<TeddyBear> array = CentralController.getInstance().findReadyTeddyBears();
         if (array == null) {
             array = new ArrayList<TeddyBear>();
         }
+        logger.info("getReadyTeddyBearList: " + array.size());
         return array.toArray();
     }
 
     private Object[] getTeddyBearList() {
-		logger.info("getTeddyBearList");
 		List<TeddyBear> array = CentralController.getInstance().findTeddyBears();
 		if (array == null) {
             array = new ArrayList<TeddyBear>();
         }
+		logger.info("getTeddyBearList: " + array.size());
         return array.toArray();
 	}
 
