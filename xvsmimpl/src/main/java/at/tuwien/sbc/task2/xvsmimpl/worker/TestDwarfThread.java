@@ -83,8 +83,11 @@ public class TestDwarfThread extends Thread {
                             }
                         }
                         
+                        tx = capi.createTransaction(10000, uri);
                         Entry entry = new Entry(t, Arrays.asList(KeyCoordinator.newCoordinationData(t.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
-                        capi.write(entry, this.teddyBearContainer);
+                        capi.write(entry, this.teddyBearContainer, 10000, tx);
+                        capi.commitTransaction(tx);
+                        
                         taken = false;
                         current = null;
                         logger.info("written");
