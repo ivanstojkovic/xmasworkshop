@@ -143,9 +143,6 @@ public class TeddyBear extends XMasWorkshopObject implements XMasWorkshopEntry {
     }
     
     public Map<String, Boolean> getDoneTests() {
-    	if(doneTests == null) {
-    		doneTests = new HashMap<String, Boolean>();
-    	}
         return doneTests;
     }
     
@@ -156,4 +153,11 @@ public class TeddyBear extends XMasWorkshopObject implements XMasWorkshopEntry {
 //            + rightHand + ", leftLeg=" + leftLeg + ", rightLeg=" + rightLeg + ", hat=" + hat + ", defective="
 //            + defective + ", ready=" + ready + "]";
     }
+
+	public Map<String, Boolean> getAlreadyDoneTests() {
+		if(doneTests == null) {
+			return new HashMap<String, Boolean>();
+		}
+		return doneTests;
+	}
 }

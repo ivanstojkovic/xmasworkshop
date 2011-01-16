@@ -60,7 +60,7 @@ public class TestDwarfThread extends Thread {
                     for (TeddyBear t : teddies) {
                         current = t;
                         
-                        Map<String, Boolean> tests = t.getDoneTests();
+                        Map<String, Boolean> tests = t.getAlreadyDoneTests();
                         boolean allTestsDone = true;
                         for (String test : tests.keySet()) {
                             if (tests.get(test) == null && test.equals(testDwarf.getTest().getName())) {
