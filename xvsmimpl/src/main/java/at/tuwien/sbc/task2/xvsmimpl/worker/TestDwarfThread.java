@@ -83,20 +83,23 @@ public class TestDwarfThread extends Thread {
                             }
                         }
                         
-                        Entry entry = new Entry(t, Arrays.asList(KeyCoordinator.newCoordinationData(t.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
-                        capi.write(entry, this.teddyBearContainer);
-                        taken = false;
-                        current = null;
-                        logger.info("written");
+                        Entry entry;
                         
                         if (allTestsDone) {
                             tx = capi.createTransaction(10000, uri);
                             logger.info("all tests done for teddy [" + t.getId() + "], sending to logistics");
-                            capi.delete(this.teddyBearContainer, Arrays.asList(KeyCoordinator.newSelector(t.getId())),
-                                0, tx);
                             entry = new Entry(t, KeyCoordinator.newCoordinationData(t.getId()));
                             capi.write(entry, this.logisticsContainer, 0, tx);
                             capi.commitTransaction(tx);
+                        } else {
+                            tx = capi.createTransaction(10000, uri);
+                            entry = new Entry(t, Arrays.asList(KeyCoordinator.newCoordinationData(t.getId()), LabelCoordinator.newCoordinationData("teddyBear")));
+                            capi.write(entry, this.teddyBearContainer, 10000, tx);
+                            capi.commitTransaction(tx);
+                            
+                            taken = false;
+                            current = null;
+                            logger.info("written");
                         }
                     }
                 }

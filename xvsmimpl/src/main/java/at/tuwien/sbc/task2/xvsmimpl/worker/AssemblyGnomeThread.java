@@ -156,6 +156,7 @@ public class AssemblyGnomeThread extends Thread {
                 
             } catch (MzsCoreException e) {
                 logger.warn(e.getMessage());
+                e.printStackTrace();
                 try {
                     capi.rollbackTransaction(tx);
                 } catch (MzsCoreException e1) {

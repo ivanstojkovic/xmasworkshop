@@ -67,14 +67,14 @@ public class XMasWorkshopWarehouse {
             legContainer = capi.createContainer("legContainer", uri, MzsConstants.Container.UNBOUNDED, Arrays.asList(
                 new KeyCoordinator(), new FifoCoordinator()), null, null);
             teddyBearContainer = capi.createContainer("teddyBearContainer", uri, MzsConstants.Container.UNBOUNDED,
-                Arrays.asList(new FifoCoordinator(), new LabelCoordinator(), new RandomCoordinator(), new KeyCoordinator()), null, null);
+                Arrays.asList(new FifoCoordinator(), new LabelCoordinator(), new RandomCoordinator()), Arrays.asList(new KeyCoordinator()), null);
             logisticsContainer = capi.createContainer("logisticsContainer", uri, MzsConstants.Container.UNBOUNDED,
                 Arrays.asList(new FifoCoordinator(), new KeyCoordinator(), new LindaCoordinator()), null, null);
             defectiveContainer = capi.createContainer("defectiveContainer", uri, MzsConstants.Container.UNBOUNDED,
                     Arrays.asList(new FifoCoordinator(), new KeyCoordinator()), null, null);
             
             
-            generateTestData();
+            //generateTestData();
             
             // TODO create a shutdown hook to stop the space...
             
