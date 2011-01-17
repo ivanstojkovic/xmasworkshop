@@ -1,2 +1,15 @@
+SBC WS2010
+Gruppe 2 (Ivan Stojkovic, Petar Petrov)
+
 This project is developed during the winter term 2010 for the course 'Distributed Computing with Space-based Computing Middleware'
 at UT Vienna. It will be a Xmas Workshop/Factory, with a lots of elves, candy and other awesomeness.
+
+Im gui.properties kann man spezifizieren ob man mit Mozartspaces oder mit WebServices den Client benutzen will.
+
+MozartSpaces:
+Man muss den Server (xvsmimpl/src/main/java/XMasWorkshopWarehouse.java) starten. 
+Danach kann man die Peers (AssemblyGnomeThread, TestDwarfThread, LogisticReindeerThread) und den Client App.java im Projekt gui starten.
+
+WebServices:
+Man muss den Server (alternatimpl/src/main/java/XMasWorkshopWarehouseServer.java) starten. 
+Danach kann man die Peers (AssemblyGnomeThread, TestDwarfThread, LogisticReindeerThread) und den Client App.java im Projekt gui starten.
